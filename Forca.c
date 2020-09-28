@@ -21,8 +21,7 @@ void AdicionarPalavras();
 
 //------
 
-int main()
-{
+int main(){
   //MENU
   int opcao;
 
@@ -41,8 +40,7 @@ int main()
   scanf("%i", &opcao);
   //printf("\nA opcao escolhida foi %i", opcao);
 
-  switch (opcao)
-  {
+  switch (opcao){
   case 1:
     multiplayer();
     break;
@@ -69,8 +67,7 @@ int main()
 
 //---------------
 
-void multiplayer()
-{ 
+void multiplayer(){ 
   //time_t t ;
   //srand (( unsigned ) time (&t ) );
   char Jogador1[20], Jogador2[20], palavra[20], letra[1];
@@ -100,8 +97,7 @@ void multiplayer()
   preencher = malloc(sizeof(char) * tamanho);
 
   //Execução das tentativas
-  for (int i = 0; i < (tamanho); i++)
-  {
+  for (int i = 0; i < (tamanho); i++){
     preencher[i] = '-';
   }
   //printf("\n");
@@ -149,18 +145,15 @@ void multiplayer()
 
 //---------------
 
-void pessoa_pc()
-{
+void pessoa_pc(){
 }
 
 //----------------
 
-void pc_pessoa()
-{
+void pc_pessoa(){
 }
 
 //----------------
 
-void AdicionarPalavras()
-{
+void AdicionarPalavras(){
 }
