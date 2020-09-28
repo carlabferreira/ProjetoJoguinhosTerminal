@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 int main(){
-    printf("\n---------------------------------");
+    int terminou = 1;
+    char primeirojogador[] = "Victor", segundojogador[] = "kkarla";
+printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
     printf("\n| Escolha sua opcao:            |");
     printf("\n| (1) 'o' começa                |");
@@ -16,14 +18,20 @@ int main(){
 
     switch (opcao){
     case 1:
-        
+    break;
+
 
     default:
     printf("Opcao invalida, saindo...\n");
     system("pause");
     }
 
+    printf("Quem começa, %s ou %s?",primeirojogador,)
+    printf 
+    while(terminou){
+        printf("");
+        scanf
+    }
     return (0);
-}
 
 }
