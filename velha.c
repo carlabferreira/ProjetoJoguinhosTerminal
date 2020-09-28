@@ -21,7 +21,7 @@ void printatabuleiro(int tabuleiro[9]){
     if(i % 3 != 2) printf(" |");
     if(i % 3 == 2 && i != 8) printaespaco();
     }
-    printf("\n")
+    printf("\n");
 }
 
 int main(){
