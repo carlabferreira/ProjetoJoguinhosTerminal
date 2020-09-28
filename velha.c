@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "testando_ganhou.c"
+#define MAX 20
 
 void printaespaco(){
     printf("\n%c%c%c %c%c%c %c%c%c\n", 196, 196, 196, 196, 196, 196, 196, 196, 196);
@@ -21,13 +25,12 @@ void printatabuleiro(int tabuleiro[9]){
     if(i % 3 != 2) printf(" |");
     if(i % 3 == 2 && i != 8) printaespaco();
     }
-    printf("\n")
+    printf("\n");
 }
 
 int main(){
-    int terminou = 1, escolha, tabuleiro[9] = {0, 1, 1, 2, 2, 1, 0, 0, 0};
-    char primeirojogador[] = "Victor", segundojogador[] = "kkarla";
-    /*
+    int terminou = 1, escolha, opcao, tabuleiro[9] = {0, 1, 1, 2, 2, 1, 0, 0, 0};
+    char primeirojogador[MAX],  segundojogador[MAX];
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
     printf("\n| Escolha sua opcao:            |");
@@ -40,19 +43,30 @@ int main(){
     printf("\n\n->");
     scanf("%i", &opcao);
     //printf("\nA opcao escolhida foi %i", opcao);
-
+    //printf("1 - o | 2 - x\n");
     switch (opcao){
-    case 1:
-    break;
-
-    default:
-    printf("Opcao invalida, saindo...\n");
-    system("pause");
+        case 1:
+            escolha = 1;
+            printf("\n'o' comeca. \nQual seu nome?");
+            scanf("%s", primeirojogador);
+            printf("\n e do 'x'?");
+            scanf("%s", segundojogador);
+            break;
+        case 2:
+            escolha = 2;
+            printf("\n'x' comeca. \nQual seu nome?");
+            scanf("%s", primeirojogador);
+            printf("\n e da 'o'?");
+            scanf("%s", segundojogador);
+            break;
+        case 3:
+            printf("Saindo...\n");
+            system("pause");
+            break;
+        default:
+        printf("Opcao invalida, saindo...\n");
+        system("pause");
     }
-    */
-    printf("Qual simbolo voce quer, %s?\n", primeirojogador);
-    printf("1 - o | 2 - x\n");
-    scanf("%d",escolha);
     printatabuleiro(tabuleiro);
     while(terminou){
         printf("");

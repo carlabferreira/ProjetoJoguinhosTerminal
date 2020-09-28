@@ -1,4 +1,4 @@
-int testando_ganhou(int vetor){
+int testando_ganhou(int vetor[]){
     //1 = 'o' e 2 = 'x'
     if (vetor[1] == vetor[4] == vetor[7]){ //vetor[1] == vetor[4] && vetor[4] == vetor[7]
         return(vetor[1]);
