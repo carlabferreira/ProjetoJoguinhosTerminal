@@ -94,7 +94,7 @@ void multiplayer()
   tamanho = strlen(palavra);
   //printf("\nA palavra possui %i letras\n", tamanho);
   //printf("A palavra escolhida foi %s", palavra);
-  system("pause");
+  scanf("%c", letra);
   system("cls");
 
   preencher = malloc(sizeof(char) * tamanho);
