@@ -16,7 +16,7 @@ int main(){
 
     switch (opcao){
     case 1:
-        
+        primeirojogador = 
 
     default:
     printf("Opcao invalida, saindo...\n");
