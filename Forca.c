@@ -155,6 +155,12 @@ void pessoa_pc(){
   int tamarquivo, tamanho; //tamanho do arquivo e da palavra
   char palavra[MAX], chute[MAX];
   //Pdispo = leitura de arquivo
+  FILE *fptr;
+  if ((fptr = fopen("palavras.txt", "r")) == NULL){
+    printf("Erro ao abrir arquivo palavras.txt\n");
+    exit(1);
+  }
+
   while(continuar!=1){
     x = rand() % tamarquivo;
     palavra = Pdispo(x,:);
