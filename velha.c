@@ -9,7 +9,7 @@ void printaespaco();
 void printatabuleiro(int vetor[]);
 
 int main(){
-    int terminou = 1, escolha, opcao, tabuleiro[9] = {0, 1, 1, 2, 2, 1, 0, 0, 0};
+    int terminou = 1, escolha, lugar, jogando = 1, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     char primeirojogador[MAX],  segundojogador[MAX];
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
@@ -49,9 +49,28 @@ int main(){
         system("pause");
     }
     printatabuleiro(tabuleiro);
-    /*while(terminou){
-        printf("");
-    }*/
+
+    while(jogando){   
+
+        printatabuleiro(tabuleiro);
+        printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
+        scanf("%d", &lugar);
+        if(escolha == 1) tabuleiro[lugar-1] = escolha;
+        else tabuleiro[lugar-1] = escolha++;
+
+        printatabuleiro(tabuleiro);
+        printf("Onde deseja colocar seu simbolo %s?", segundojogador);
+        scanf("%d", &lugar);
+        if(escolha == 1) tabuleiro[lugar-1] = escolha--;
+        else tabuleiro[lugar-1] = escolha;
+
+        if(testando_ganhou(tabuleiro) != 0){
+            jogando = 0;
+            if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
+            else printf("%s ganhou", segundojogador);
+        } 
+    }
+
     return (0);
 
 }
