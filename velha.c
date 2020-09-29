@@ -63,12 +63,17 @@ int main(){
         if(escolha == 1) tabuleiro[lugar-1] = 1;
         else tabuleiro[lugar-1] = 2;
 
-        printf("\n%d\n",testando_ganhou(tabuleiro));
         if(testando_ganhou(tabuleiro) != 0){
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
             break;
         } 
+        if(testando_velha(tabuleiro)){
+            printf("Caralho, cê é muito ruim %s, começou e perdeu KKKKKK", primeirojogador);
+            break;
+        }
+
+
 
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", segundojogador);
@@ -81,12 +86,16 @@ int main(){
         if(escolha == 1) tabuleiro[lugar-1] = 2;
         else tabuleiro[lugar-1] = 1;
 
-        printf("\n%d\n",testando_ganhou(tabuleiro));
         if(testando_ganhou(tabuleiro) != 0){
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
             break;
-        } 
+        }
+        if(testando_velha(tabuleiro)){
+            printf("Caralho, cê é muito ruim %s, começou e perdeu KKKKKK", primeirojogador);
+            break;
+        }
+
     }
 
     return (0);
@@ -154,3 +163,9 @@ int testando_ganhou(int vetor[]){
         return(0);
     }
 }
+
+int testa_velha(int vetor[]){
+    for(int i = 0; i < 9; i++) if(vetor[i] == 0) return 0;
+    return 1;
+}
+
