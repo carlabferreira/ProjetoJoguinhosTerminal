@@ -72,6 +72,8 @@ int main(){
         else tabuleiro[lugar-1] = 2;
 
         if(testando_ganhou(tabuleiro) != 0){
+            system("cls");
+            printatabuleiro(tabuleiro);
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
             break;
@@ -96,6 +98,8 @@ int main(){
         else tabuleiro[lugar-1] = 1;
 
         if(testando_ganhou(tabuleiro) != 0){
+            system("cls");
+            printatabuleiro(tabuleiro);
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
             break;
