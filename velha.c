@@ -55,6 +55,11 @@ int main(){
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
         scanf("%d", &lugar);
+        while(tabuleiro[lugar-1] != 0){
+            printf("Sabe jogar jogo da velha não %s?\nEscolha um lugar diferente para colocar seu simbolo: ",primeirojogador);
+            scanf("%d", &lugar);
+        }
+
         if(escolha == 1) tabuleiro[lugar-1] = 1;
         else tabuleiro[lugar-1] = 2;
 
@@ -68,6 +73,11 @@ int main(){
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", segundojogador);
         scanf("%d", &lugar);
+        while(tabuleiro[lugar-1] != 0){
+            printf("Sabe jogar jogo da velha não %s?\nEscolha um lugar diferente para colocar seu simbolo: ",primeirojogador);
+            scanf("%d", &lugar);
+        }
+
         if(escolha == 1) tabuleiro[lugar-1] = 2;
         else tabuleiro[lugar-1] = 1;
 
