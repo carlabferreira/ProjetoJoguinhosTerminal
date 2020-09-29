@@ -100,28 +100,28 @@ void printatabuleiro(int tabuleiro[9]){
 
 int testando_ganhou(int vetor[]){
     //1 = 'o' e 2 = 'x'
-    if (vetor[1] == vetor[4] == vetor[7] && vetor[1]!=0){ //vetor[1] == vetor[4] && vetor[4] == vetor[7]
+    if (vetor[1] == vetor[4] && vetor[4] == vetor[7] && vetor[1]!=0){ //vetor[1] == vetor[4] && vetor[4] == vetor[7]
         return(vetor[1]);
     }else 
-    if(vetor[2] == vetor[5] == vetor[8] && vetor[2]!=0){
+    if(vetor[2] == vetor[5] && vetor[5]== vetor[8] && vetor[2]!=0){
         return(vetor[2]);
     }else 
-    if(vetor[3] == vetor[6] == vetor[9] && vetor[3]!=0){
+    if(vetor[3] == vetor[6] && vetor[6]== vetor[9] && vetor[3]!=0){
         return(vetor[3]);
     }else 
-    if(vetor[1] == vetor[2] == vetor[3] && vetor[1]!=0){
+    if(vetor[1] == vetor[2] && vetor[2]== vetor[3] && vetor[1]!=0){
         return(vetor[1]);
     }else 
-    if(vetor[4] == vetor[5] == vetor[6] && vetor[4]!=0){
+    if(vetor[4] == vetor[5] && vetor[5]== vetor[6] && vetor[4]!=0){
         return(vetor[4]);
     }else 
-    if(vetor[7] == vetor[8] == vetor[9] && vetor[7]!=0){
+    if(vetor[7] == vetor[8] && vetor[8]== vetor[9] && vetor[7]!=0){
         return(vetor[7]);
     }else 
-    if(vetor[1] == vetor[5] == vetor[9] && vetor[1]!=0){
+    if(vetor[1] == vetor[5] && vetor[5]== vetor[9] && vetor[1]!=0){
         return(vetor[1]);
     }else 
-    if(vetor[3] == vetor[5] == vetor[7] && vetor[3]!=0){
+    if(vetor[3] == vetor[5] && vetor[5]== vetor[7] && vetor[3]!=0){
         return(vetor[3]);
     }else{
         return(0);
