@@ -11,15 +11,15 @@ int testando_velha(int vetor[]);
 int main(){
     int terminou = 1, escolha, lugar, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     char primeirojogador[MAX],  segundojogador[MAX], simbolo1, simbolo2;
-    printf("\n---------------------------------");
-    printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
-    printf("\n|       versao passiva-agressiva|");
-    printf("\n| Escolha sua opcao:            |");
-    printf("\n| (1) 'o' comeca                |");
-    printf("\n| (2) 'x' comeca                |");
-    printf("\n| (3) Sair                      |");
-    printf("\n              by Carla and Victor");
-    printf("\n---------------------------------");
+    printf("\n%c--------------------------------%c", 176, 176);
+    printf("\n|  BEM-VINDO AO JOGO DA VELHA    |");
+    printf("\n|       versao passiva-agressiva |");
+    printf("\n| Escolhe ai:                    |");
+    printf("\n| (1) 'o' comeca                 |");
+    printf("\n| (2) 'x' comeca                 |");
+    printf("\n| (3) Sair                       |");
+    printf("\n|            by Carla and Victor |");
+    printf("\n%c--------------------------------%c", 176, 176);
 
     printf("\n\n->");
     scanf("%i", &opcao);
@@ -42,8 +42,10 @@ int main(){
             scanf("%s", segundojogador);
             break;
         case 3:
+            printf("\nComecou por que entao caralho?\n");
             printf("Saindo...\n");
             system("pause");
+            return(0);
             break;
         default:
         printf("Opcao invalida, saindo...\n");
