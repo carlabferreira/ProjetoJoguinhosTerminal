@@ -16,7 +16,6 @@ Jogo da forca em C com menu para escolher o tipo de jogo
 //Declaração das funções:
 void menu();
 void multiplayer();
-void pessoa_pc();
 void pc_pessoa();
 void AdicionarPalavras();
 
@@ -31,9 +30,8 @@ int main(){
   printf("\n| Escolha sua opcao:            |");
   printf("\n| (1) Multiplayer local         |");
   printf("\n| (2) Voce contra a maquina     |");
-  printf("\n| (3) Maquina contra voce       |");
-  printf("\n| (4) Sair                      |");
-  printf("\n| (5) Adicionar palavras ao jogo|");
+  printf("\n| (3) Sair                      |");
+  printf("\n| (4) Adicionar palavras ao jogo|");
   printf("\n---------------------------------");
   printf("\n                by Carla Ferreira");
 
@@ -49,13 +47,10 @@ int main(){
     pessoa_pc();
     break;
   case 3:
-    pc_pessoa();
-    break;
-  case 4:
     printf("Saindo...\n");
     system("pause");
     break;
-  case 5:
+  case 4:
     AdicionarPalavras();
     break;
   default:
@@ -69,13 +64,10 @@ int main(){
 //---------------
 
 void multiplayer(){ 
-  //time_t t ;
-  //srand (( unsigned ) time (&t ) );
   char Jogador1[MAX], Jogador2[MAX], palavra[MAX], letra[1];
   char *preencher;
   int certo = 0;
 
-  //preencher deve ser mudado para alocação dinamica
   int tamanho, tentativas;
   system("cls"); //Limpa a tela, mas funciona só no windows
 
@@ -90,8 +82,6 @@ void multiplayer(){
   printf("\nDigite o numero de tentativas (recomendado = 10): ");
   scanf("%i", &tentativas);
   tamanho = strlen(palavra);
-  //printf("\nA palavra possui %i letras\n", tamanho);
-  //printf("A palavra escolhida foi %s", palavra);
   scanf("%c", letra);
   system("cls");
 
@@ -101,45 +91,31 @@ void multiplayer(){
   for (int i = 0; i < (tamanho); i++){
     preencher[i] = '-';
   }
-  //printf("\n");
-  /*for (int i = 0; i < (tamanho); i++)
-  {
-    printf("%c", preencher[i]);
-  }*/
-  //printf("\n%s", preencher);
 
   while (tentativas > 0 && certo != tamanho){
-    //printf("\n%s", preencher);
     printf("\n");
     for (int i = 0; i < (tamanho); i++){
       printf("%c", preencher[i]);
     }
     printf("\nDigite a letra que voce quer chutar: ");
+    fflush(stdin);
     scanf("%c", letra);
     for (int i = 0; i < tamanho; i++){
       if (palavra[i] == letra[0])
       {
-        //printf("\n A palavra possui a letra sugerida!");
         preencher[i] = letra[0];
         tentativas = tentativas +1;
         certo ++;
       }
-      else
-      {
-        //printf("A palavra não possui essa letra");
-      }
     }
-  if (certo == tamanho){
-    printf("\nPARABENS, VOCE VENCEU!!!");
-    printf("\nA palavra era \"");
-    for (int i = 0; i < (tamanho); i++){
-      printf("%c", preencher[i]);
+    if (certo == tamanho){
+      printf("\nPARABENS, VOCE VENCEU!!!");
+      printf("\nA palavra era \"");
+      printf("%s\"", palavra);
+      break;
     }
-    printf("\"");
-    break;
-  }
-  tentativas = tentativas - 1;
-  printf("\nrestam %d tentativas", tentativas);
+    tentativas = tentativas - 1;
+    printf("\nrestam %d tentativas", tentativas);
   }
   free(preencher);
 }
@@ -215,12 +191,5 @@ void pessoa_pc(){
 }
 
 //----------------
-
-void pc_pessoa(){
-
-}
-
-//----------------
-
 void AdicionarPalavras(){
 }
