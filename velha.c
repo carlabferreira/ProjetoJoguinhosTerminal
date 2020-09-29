@@ -28,16 +28,16 @@ int main(){
     switch (opcao){
         case 1:
             escolha = 1;
-            printf("\n'o' comeca. \nQual seu nome?");
+            printf("\n'o' comeca. \nQual o nome do primeiro trouxa?");
             scanf("%s", primeirojogador);
-            printf("\n e do 'x'?");
+            printf("\n e do segundo, vulgo 'x'?");
             scanf("%s", segundojogador);
             break;
         case 2:
             escolha = 2;
-            printf("\n'x' comeca. \nQual seu nome?");
+            printf("\n'x' comeca. \nQual o nome do primeiro trouxa?");
             scanf("%s", primeirojogador);
-            printf("\n e da 'o'?");
+            printf("\n e do segundo, vulgo 'o'?");
             scanf("%s", segundojogador);
             break;
         case 3:
