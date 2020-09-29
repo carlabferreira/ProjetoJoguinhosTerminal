@@ -24,16 +24,17 @@ int main(){
     scanf("%i", &opcao);
     //printf("\nA opcao escolhida foi %i", opcao);
     //printf("1 - o | 2 - x\n");
+
     switch (opcao){
         case 1:
-            escolha = 1;
+            escolha = 0;// 0 = 'o' e 1 = 'x'
             printf("\n'o' comeca. \nQual seu nome?");
             scanf("%s", primeirojogador);
             printf("\n e do 'x'?");
             scanf("%s", segundojogador);
             break;
         case 2:
-            escolha = 2;
+            escolha = 1;
             printf("\n'x' comeca. \nQual seu nome?");
             scanf("%s", primeirojogador);
             printf("\n e da 'o'?");
