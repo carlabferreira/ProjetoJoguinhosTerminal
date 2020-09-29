@@ -13,6 +13,7 @@ int main(){
     char primeirojogador[MAX],  segundojogador[MAX], simbolo1, simbolo2;
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
+    printf("\n|       versao passiva-agressiva|");
     printf("\n| Escolha sua opcao:            |");
     printf("\n| (1) 'o' comeca                |");
     printf("\n| (2) 'x' comeca                |");
