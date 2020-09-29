@@ -64,7 +64,7 @@ int main(){
         printf("Onde deseja colocar %c, %s?", simbolo1, primeirojogador);
         scanf("%d", &lugar);
         while(tabuleiro[lugar-1] != 0){
-            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar %c: ",primeirojogador, simbolo2);
+            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar %c: ",primeirojogador, simbolo1);
             scanf("%d", &lugar);
         }
 
