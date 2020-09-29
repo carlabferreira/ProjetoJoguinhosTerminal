@@ -9,7 +9,7 @@ void printaespaco();
 void printatabuleiro(int vetor[]);
 
 int main(){
-    int terminou = 1, escolha, lugar, jogando = 1, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int terminou = 1, escolha, lugar, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     char primeirojogador[MAX],  segundojogador[MAX];
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
@@ -50,24 +50,32 @@ int main(){
     }
     printatabuleiro(tabuleiro);
 
-    while(jogando){   
+    while(1){   
 
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
         scanf("%d", &lugar);
-        if(escolha == 1) tabuleiro[lugar-1] = escolha;
-        else tabuleiro[lugar-1] = escolha++;
+        if(escolha == 1) tabuleiro[lugar-1] = 1;
+        else tabuleiro[lugar-1] = 2;
+
+        printf("\n%d\n",testando_ganhou(tabuleiro));
+        if(testando_ganhou(tabuleiro) != 0){
+            if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
+            else printf("%s ganhou", segundojogador);
+            break;
+        } 
 
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", segundojogador);
         scanf("%d", &lugar);
-        if(escolha == 1) tabuleiro[lugar-1] = escolha--;
-        else tabuleiro[lugar-1] = escolha;
+        if(escolha == 1) tabuleiro[lugar-1] = 2;
+        else tabuleiro[lugar-1] = 1;
 
+        printf("\n%d\n",testando_ganhou(tabuleiro));
         if(testando_ganhou(tabuleiro) != 0){
-            jogando = 0;
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
+            break;
         } 
     }
 
@@ -103,25 +111,25 @@ int testando_ganhou(int vetor[]){
     if (vetor[1] == vetor[4] && vetor[4] == vetor[7] && vetor[1]!=0){ //vetor[1] == vetor[4] && vetor[4] == vetor[7]
         return(vetor[1]);
     }else 
-    if(vetor[2] == vetor[5] && vetor[5]== vetor[8] && vetor[2]!=0){
+    if(vetor[2] == vetor[5] && vetor[5] == vetor[8] && vetor[2]!=0){
         return(vetor[2]);
     }else 
-    if(vetor[3] == vetor[6] && vetor[6]== vetor[9] && vetor[3]!=0){
+    if(vetor[3] == vetor[6] && vetor[6] == vetor[9] && vetor[3]!=0){
         return(vetor[3]);
     }else 
-    if(vetor[1] == vetor[2] && vetor[2]== vetor[3] && vetor[1]!=0){
+    if(vetor[1] == vetor[2] && vetor[2] == vetor[3] && vetor[1]!=0){
         return(vetor[1]);
     }else 
-    if(vetor[4] == vetor[5] && vetor[5]== vetor[6] && vetor[4]!=0){
+    if(vetor[4] == vetor[5] && vetor[5] == vetor[6] && vetor[4]!=0){
         return(vetor[4]);
     }else 
-    if(vetor[7] == vetor[8] && vetor[8]== vetor[9] && vetor[7]!=0){
+    if(vetor[7] == vetor[8] && vetor[8] == vetor[9] && vetor[7]!=0){
         return(vetor[7]);
     }else 
-    if(vetor[1] == vetor[5] && vetor[5]== vetor[9] && vetor[1]!=0){
+    if(vetor[1] == vetor[5] && vetor[5] == vetor[9] && vetor[1]!=0){
         return(vetor[1]);
     }else 
-    if(vetor[3] == vetor[5] && vetor[5]== vetor[7] && vetor[3]!=0){
+    if(vetor[3] == vetor[5] && vetor[5] == vetor[7] && vetor[3]!=0){
         return(vetor[3]);
     }else{
         return(0);
