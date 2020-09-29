@@ -9,7 +9,7 @@ void printaespaco();
 void printatabuleiro(int vetor[]);
 
 int main(){
-    int terminou = 1, escolha, lugar, jogando = 1, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int terminou = 1, escolha, lugar, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     char primeirojogador[MAX],  segundojogador[MAX];
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
@@ -50,24 +50,32 @@ int main(){
     }
     printatabuleiro(tabuleiro);
 
-    while(jogando){   
+    while(1){   
 
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
         scanf("%d", &lugar);
-        if(escolha == 1) tabuleiro[lugar-1] = escolha;
-        else tabuleiro[lugar-1] = escolha++;
+        if(escolha == 1) tabuleiro[lugar-1] = 1;
+        else tabuleiro[lugar-1] = 2;
+
+        printf("\n%d\n",testando_ganhou(tabuleiro));
+        if(testando_ganhou(tabuleiro) != 0){
+            if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
+            else printf("%s ganhou", segundojogador);
+            break;
+        } 
 
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", segundojogador);
         scanf("%d", &lugar);
-        if(escolha == 1) tabuleiro[lugar-1] = escolha--;
-        else tabuleiro[lugar-1] = escolha;
+        if(escolha == 1) tabuleiro[lugar-1] = 2;
+        else tabuleiro[lugar-1] = 1;
 
+        printf("\n%d\n",testando_ganhou(tabuleiro));
         if(testando_ganhou(tabuleiro) != 0){
-            jogando = 0;
             if(testando_ganhou(tabuleiro) == escolha) printf("%s ganhou", primeirojogador);
             else printf("%s ganhou", segundojogador);
+            break;
         } 
     }
 
@@ -101,29 +109,38 @@ void printatabuleiro(int tabuleiro[9]){
 int testando_ganhou(int vetor[]){
     //1 = 'o' e 2 = 'x'
     if (vetor[1] == vetor[4] && vetor[4] == vetor[7]){ //vetor[1] == vetor[4] && vetor[4] == vetor[7]
+        printf("\nif 1\n");
         return(vetor[1]);
     }else 
-    if(vetor[2] == vetor[5] && vetor[5]== vetor[8]){
+    if(vetor[2] == vetor[5] && vetor[5] == vetor[8]){
+        printf("\nif 2\n");
         return(vetor[2]);
     }else 
-    if(vetor[3] == vetor[6] && vetor[6]== vetor[9]){
+    if(vetor[3] == vetor[6] && vetor[6] == vetor[9]){
+        printf("\nif 3\n");
         return(vetor[3]);
     }else 
-    if(vetor[1] == vetor[2] && vetor[2]== vetor[3]){
+    if(vetor[1] == vetor[2] && vetor[2] == vetor[3]){
+        printf("\nif 4\n");
         return(vetor[1]);
     }else 
-    if(vetor[4] == vetor[5] && vetor[5]== vetor[6]){
+    if(vetor[4] == vetor[5] && vetor[5] == vetor[6]){
+        printf("\nif 5\n");
         return(vetor[4]);
     }else 
-    if(vetor[7] == vetor[8] && vetor[8]== vetor[9]){
+    if(vetor[7] == vetor[8] && vetor[8] == vetor[9]){
+        printf("\nif 6\n");
         return(vetor[7]);
     }else 
-    if(vetor[1] == vetor[5] && vetor[5]== vetor[9]){
+    if(vetor[1] == vetor[5] && vetor[5] == vetor[9]){
+        printf("\nif 7\n");
         return(vetor[1]);
     }else 
-    if(vetor[3] == vetor[5] && vetor[5]== vetor[7]){
+    if(vetor[3] == vetor[5] && vetor[5] == vetor[7]){
+        printf("\nif 8\n");
         return(vetor[3]);
     }else{
+        printf("\nelse 0\n");
         return(0);
     }
 }
