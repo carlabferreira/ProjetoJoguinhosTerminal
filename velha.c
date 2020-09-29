@@ -10,7 +10,7 @@ int testando_velha(int vetor[]);
 
 int main(){
     int terminou = 1, escolha, lugar, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char primeirojogador[MAX],  segundojogador[MAX];
+    char primeirojogador[MAX],  segundojogador[MAX], simbolo1, simbolo2;
     printf("\n---------------------------------");
     printf("\n|  BEM-VINDO AO JOGO DA VELHA   |");
     printf("\n| Escolha sua opcao:            |");
@@ -48,15 +48,23 @@ int main(){
         printf("Opcao invalida, saindo...\n");
         system("pause");
     }
-    printatabuleiro(tabuleiro);
+
+    if(escolha == 1){
+        simbolo1 = 'o';
+        simbolo2 = 'x';
+    }
+    else{
+        simbolo1 = 'x';
+        simbolo2 = 'o';
+    }
 
     while(1){   
         system("cls");
         printatabuleiro(tabuleiro);
-        printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
+        printf("Onde deseja colocar %c, %s?", simbolo1, primeirojogador);
         scanf("%d", &lugar);
         while(tabuleiro[lugar-1] != 0){
-            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar seu simbolo: ",primeirojogador);
+            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar %c: ",primeirojogador, simbolo2);
             scanf("%d", &lugar);
         }
 
@@ -77,10 +85,10 @@ int main(){
 
         system("cls");
         printatabuleiro(tabuleiro);
-        printf("Onde deseja colocar seu simbolo %s?", segundojogador);
+        printf("Onde deseja colocar %c, %s?", simbolo2, segundojogador);
         scanf("%d", &lugar);
         while(tabuleiro[lugar-1] != 0){
-            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar seu simbolo: ",segundojogador);
+            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar %c: ", segundojogador, simbolo2);
             scanf("%d", &lugar);
         }
 
