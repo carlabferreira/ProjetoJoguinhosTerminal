@@ -10,6 +10,7 @@ Jogo da forca em C com menu para escolher o tipo de jogo
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#define MAX 20
 //#include <dos.h>
 
 //Declaração das funções:
@@ -70,7 +71,7 @@ int main(){
 void multiplayer(){ 
   //time_t t ;
   //srand (( unsigned ) time (&t ) );
-  char Jogador1[20], Jogador2[20], palavra[20], letra[1];
+  char Jogador1[MAX], Jogador2[MAX], palavra[MAX], letra[1];
   char *preencher;
   int certo = 0;
 
@@ -146,11 +147,71 @@ void multiplayer(){
 //---------------
 
 void pessoa_pc(){
+  
+  /*time_t t ;
+  srand (( unsigned ) time (&t ) );
+
+  int continuar = 0, vitorias = 0, derrotas = 0, x, Ntenta = 10, posi, certo=0;
+  int tamarquivo, tamanho; //tamanho do arquivo e da palavra
+  char palavra[MAX], chute[MAX];
+  //Pdispo = leitura de arquivo
+  while(continuar!=1){
+    x = rand() % tamarquivo;
+    palavra = Pdispo(x,:);
+    //printf(palavra)
+    printf("\n");
+    for (int i = 0; i < (tamanho); i++){
+      printf("%c", preencher[i]);
+    }
+    tamanho = strlen(palavra);
+    //printf("\nA palavra possui %i letras\n", tamanho);
+
+    for (int i=0; i<tamanho; i++);{
+      preencher[i] = '-' ;
+    }
+    //printf(preencher)
+    //tirando o numero de espacos restantes
+    chute = ' ';
+    posi = find (palavra==chute);
+    preencher[posi] = chute;
+
+    while (1){
+      printf("\n");
+      
+      printf ("\n");
+      chute = input ('digite a letra que voce quer chutar: ', '%s');
+      posi = find (palavra==chute);
+      if (length(posi)==0){
+        Ntenta--;
+        printf("\n");
+        printf("essa letra nao esta na palavra");
+        printf("Seu numero de tentaivas restantes eh: %d", Ntenta);
+      }
+      else{
+        preencher[posi] = chute;
+      }
+      //checando se acabou
+      if (certo == tamanho){
+        printf("\nPARABENS, VOCE VENCEU!!!");
+        printf("\nA palavra era \"");
+        for (int i = 0; i < (tamanho); i++){
+          printf("%c", preencher[i]);
+        }
+      printf("\"");
+      break;
+      }
+    }
+  }
+  continuar = input ('tecle 1 para parar ou outro para continuar: ');
+  printf("\nO numero de vitorias foi: %d", vitorias);
+  printf("\nO numero de derrotas foi: %d", derrotas);
+  */
 }
 
 //----------------
 
 void pc_pessoa(){
+
 }
 
 //----------------
