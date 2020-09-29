@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "testando_ganhou.c"
 #define MAX 20
 
 int testando_ganhou(int vetor[]);
 void printaespaco();
 void printatabuleiro(int vetor[]);
+int testando_velha(int vetor[]);
 
 int main(){
     int terminou = 1, escolha, lugar, opcao, tabuleiro[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -51,12 +51,12 @@ int main(){
     printatabuleiro(tabuleiro);
 
     while(1){   
-
+        system("cls");
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", primeirojogador);
         scanf("%d", &lugar);
         while(tabuleiro[lugar-1] != 0){
-            printf("Sabe jogar jogo da velha não %s?\nEscolha um lugar diferente para colocar seu simbolo: ",primeirojogador);
+            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar seu simbolo: ",primeirojogador);
             scanf("%d", &lugar);
         }
 
@@ -69,17 +69,18 @@ int main(){
             break;
         } 
         if(testando_velha(tabuleiro)){
-            printf("Caralho, cê é muito ruim %s, começou e perdeu KKKKKK", primeirojogador);
+            printf("Caralho, ce eh muito ruim %s, comecou e nao venceu KKKKKK", primeirojogador);
             break;
         }
 
 
 
+        system("cls");
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar seu simbolo %s?", segundojogador);
         scanf("%d", &lugar);
         while(tabuleiro[lugar-1] != 0){
-            printf("Sabe jogar jogo da velha não %s?\nEscolha um lugar diferente para colocar seu simbolo: ",segundojogador);
+            printf("Sabe jogar jogo da velha nao %s?\nEscolha um lugar diferente para colocar seu simbolo: ",segundojogador);
             scanf("%d", &lugar);
         }
 
@@ -92,7 +93,7 @@ int main(){
             break;
         }
         if(testando_velha(tabuleiro)){
-            printf("Caralho, cê é muito ruim %s, começou e perdeu KKKKKK", primeirojogador);
+            printf("Caralho, ce eh muito ruim %s, comecou e nao venceu KKKKKK", primeirojogador);
             break;
         }
 
@@ -138,7 +139,7 @@ int testando_ganhou(int vetor[]){
     else return(0);
 }
 
-int testa_velha(int vetor[]){
+int testando_velha(int vetor[]){
     for(int i = 0; i < 9; i++) if(vetor[i] == 0) return 0;
     return 1;
 }
