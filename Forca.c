@@ -16,7 +16,7 @@ Jogo da forca em C com menu para escolher o tipo de jogo
 //Declaração das funções:
 void menu();
 void multiplayer();
-void pc_pessoa();
+void pessoa_pc();
 void AdicionarPalavras();
 
 //------
@@ -25,15 +25,15 @@ int main(){
   //MENU
   int opcao;
 
-  printf("\n---------------------------------");
-  printf("\n|  BEM-VINDO AO JOGO DE FORCA   |");
-  printf("\n| Escolha sua opcao:            |");
-  printf("\n| (1) Multiplayer local         |");
-  printf("\n| (2) Voce contra a maquina     |");
-  printf("\n| (3) Sair                      |");
-  printf("\n| (4) Adicionar palavras ao jogo|");
-  printf("\n---------------------------------");
-  printf("\n                by Carla Ferreira");
+  printf("\n----------------------------------");
+  printf("\n|  BEM-VINDO AO JOGO DE FORCA    |");
+  printf("\n| Escolha sua opcao:             |");
+  printf("\n| (1) Multiplayer local          |");
+  printf("\n| (2) Contra a maquina           |");
+  printf("\n| (3) Sair                       |");
+  printf("\n| (4) Adicionar palavras ao jogo |");
+  printf("\n----------------------------------");
+  printf("\n                by Carla Ferreira ");
 
   printf("\n\n->");
   scanf("%i", &opcao);
@@ -123,15 +123,19 @@ void multiplayer(){
 //---------------
 
 void pessoa_pc(){
-  
-  /*time_t t ;
+  /*fscanf ( fp , " % s% d " , s , &t ) ; /* le do arquivo 
+  fprintf ( stdout , " % s % d " , s , t ) ; /* imprime na tela 
+  return 0;
+  printf("\nna funcao pessoa_pc");
+  time_t t ;
   srand (( unsigned ) time (&t ) );
 
   int continuar = 0, vitorias = 0, derrotas = 0, x, Ntenta = 10, posi, certo=0;
-  int tamarquivo, tamanho; //tamanho do arquivo e da palavra
-  char palavra[MAX], chute[MAX];
-  //Pdispo = leitura de arquivo
+  int tamarquivo, tamanho, tentativas, i; //tamanho do arquivo e da palavra
+  char palavra[MAX], letra[MAX];
+  char *preencher;
   FILE *fptr;
+  fptr = fopen("palavras.txt", "r");
   if ((fptr = fopen("palavras.txt", "r")) == NULL){
     printf("Erro ao abrir arquivo palavras.txt\n");
     exit(1);
@@ -139,38 +143,42 @@ void pessoa_pc(){
 
   while(continuar!=1){
     x = rand() % tamarquivo;
-    palavra = Pdispo(x,:);
-    //printf(palavra)
+    palavra = fptr[x];
     printf("\n");
     for (int i = 0; i < (tamanho); i++){
       printf("%c", preencher[i]);
     }
     tamanho = strlen(palavra);
+    preencher = malloc(sizeof(char) * tamanho);
     //printf("\nA palavra possui %i letras\n", tamanho);
 
     for (int i=0; i<tamanho; i++);{
       preencher[i] = '-' ;
     }
-    //printf(preencher)
-    //tirando o numero de espacos restantes
-    chute = ' ';
-    posi = find (palavra==chute);
-    preencher[posi] = chute;
 
-    while (1){
-      printf("\n");
-      
-      printf ("\n");
-      chute = input ('digite a letra que voce quer chutar: ', '%s');
-      posi = find (palavra==chute);
-      if (length(posi)==0){
-        Ntenta--;
-        printf("\n");
-        printf("essa letra nao esta na palavra");
-        printf("Seu numero de tentaivas restantes eh: %d", Ntenta);
+    //tirando o numero de espacos restantes
+    letra[0] = ' ';
+    for (int i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
+    //posi = find (palavra==letra);
+    for (int i = 0; i < tamanho; i++){
+      if (palavra[i] == letra[0]){
+        preencher[i] = letra[0];
       }
-      else{
-        preencher[posi] = chute;
+    }
+    while (1){
+      //posi = find (palavra==letra);
+
+      //checando se a letra esta na palavra
+      printf("\nDigite a letra que voce quer chutar: ");
+      fflush(stdin);
+      scanf("%c", letra);
+      for (int i = 0; i < tamanho; i++){
+        if (palavra[i] == letra[0])
+        {
+          preencher[i] = letra[0];
+          tentativas = tentativas +1;
+          certo ++;
+        }
       }
       //checando se acabou
       if (certo == tamanho){
@@ -184,10 +192,10 @@ void pessoa_pc(){
       }
     }
   }
-  continuar = input ('tecle 1 para parar ou outro para continuar: ');
+  printf("\nTecle 1 para parar ou outro para continuar: ");
   printf("\nO numero de vitorias foi: %d", vitorias);
   printf("\nO numero de derrotas foi: %d", derrotas);
-  */
+  fclose(fptr);*/
 }
 
 //----------------
