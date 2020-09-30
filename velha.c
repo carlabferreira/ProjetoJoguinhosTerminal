@@ -23,7 +23,6 @@ int main(){
 
     printf("\n\n->");
     scanf("%i", &opcao);
-    //printf("\nA opcao escolhida foi %i", opcao);
     //printf("1 - o | 2 - x\n");
 
     switch (opcao){
@@ -61,7 +60,8 @@ int main(){
         simbolo2 = 'o';
     }
 
-    while(1){   
+    while(1){
+        //Execuçao para o primeiro jogador 
         system("cls");
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar %c, %s?", simbolo1, primeirojogador);
@@ -87,7 +87,7 @@ int main(){
         }
 
 
-
+        //Execuçao para o segundo jogador
         system("cls");
         printatabuleiro(tabuleiro);
         printf("Onde deseja colocar %c, %s?", simbolo2, segundojogador);
@@ -143,6 +143,7 @@ void printatabuleiro(int tabuleiro[9]){
 
 int testando_ganhou(int vetor[]){
     //1 = 'o' e 2 = 'x'
+    //Considera as 8 possibiidades de vitoria (3 vertical, 3 horizontal, 2 diagonal)
     if (vetor[0] == vetor[3] && vetor[3] == vetor[6]) return(vetor[0]);
     else if(vetor[1] == vetor[4] && vetor[4] == vetor[7]) return(vetor[1]);
     else if(vetor[2] == vetor[5] && vetor[5] == vetor[8]) return(vetor[2]);
