@@ -32,8 +32,8 @@ int main(){
   printf("\n| Escolha sua opcao:             |");
   printf("\n| (1) Multiplayer local          |");
   printf("\n| (2) Contra a maquina           |");
-  printf("\n| (3) Sair                       |");
-  printf("\n| (4) Adicionar palavras ao jogo |");
+  printf("\n| (3) Adicionar palavras ao jogo |");
+  printf("\n| (4) Sair                       |");
   printf("\n----------------------------------");
   printf("\n                by Carla Ferreira ");
 
@@ -49,11 +49,11 @@ int main(){
     pessoa_pc();
     break;
   case 3:
-    printf("Saindo...\n");
-    system("pause");
+    AdicionarPalavras();
     break;
   case 4:
-    AdicionarPalavras();
+    printf("Saindo...\n");
+    system("pause");
     break;
   default:
     printf("Opcao invalida, saindo...\n");
@@ -126,4 +126,18 @@ void multiplayer(){
 
 //----------------
 void AdicionarPalavras(){
+  char palavra [MAX];
+  FILE *fptr;
+
+  fptr = fopen("palavras.txt", "a");;
+  //Abrindo o aquivo 
+  if (fptr == NULL){
+        printf("Erro ao abrir arquivo palavras.txt\n");
+        exit(1);
+  }
+  printf("\nQual palavra deseja adicionar ao banco de dados?\n");
+  fflush(stdin);
+  scanf("%s", palavra);
+  fprintf(fptr, "\n%s", palavra);
+  fclose(fptr);
 }
