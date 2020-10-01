@@ -30,8 +30,8 @@ void pessoa_pc(){
     //lendo a palvra certa no aquivo
     x = rand() % linhas;
     //printf("x = %d", x);
-    fscanf ( fptr , "%s", palavras) ;
-    palavra[0] = palavras[x];
+    fscanf ( fptr , "%s", palavras);
+    //palavra[0] = palavras[x];
     printf("\n A palavra escolhida foi %s", palavra);
   
 
@@ -58,9 +58,9 @@ void pessoa_pc(){
         for (int i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
         //posi = find (palavra==letra);
         for (int i = 0; i < tamanho; i++){
-        if (palavra[i] == letra[0]){
-            preencher[i] = letra[0];
-        }
+            if (palavra[i] == letra[0]){
+                preencher[i] = letra[0];
+            }
         }
         while (1){
         //posi = find (palavra==letra);
