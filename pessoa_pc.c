@@ -1,43 +1,27 @@
   
   
 void pessoa_pc(){  
-    //gerando semente para numeros aleatorios
-    time_t t ;
-    srand (( unsigned ) time (&t ) );
-
-    //Declaração de variaveis
-    int i, linhas = 0;
-    char palavra[100], c;
-    char * palavras;
-    FILE *fptr;
-
-    fptr = fopen("palavras2.txt", "r");;
-
-    //Abrindo o arquivo
-    if (fptr == NULL){
-        printf("Erro ao abrir arquivo palavras.txt\n");
-        exit(1);
+    FILE* fptr = fopen("palavras2.txt", "r");
+    FILE* fp = fopen("palavras2.txt", "r");
+    if(fptr == NULL) {
+        fprintf(stderr, "Erro ao abrir o palavras2.txt.");
     }
-    //descobrindo quantas palavras o aquivo tem pelas linhas
-    while(fread (&c, sizeof(char), 1, fptr)) {
-        if(c == '\n') {
-            linhas++;
-        }
-    } 
-    printf("\nLinhas: %i\n",linhas + 1);
-    //fseek( fptr, 0L, SEEK_END );
-    //long tam = ftell(fptr);
+    int i = 1, linhas = 0;
+    char linha[1024], linha2[1024];
+    char c, letra = '\n';
+    
+    while(fgets(linha2, sizeof(linha2), fp) != NULL) {
+        linhas++;
+    }
 
-    //lendo a palvra certa no aquivo
-    int x = rand() % linhas;
-    printf("\n x = %d", x);
-    while( i <= x) {
-        fgets(palavra, sizeof(palavra), fptr);
+    srand(time(NULL));
+    while(i <= rand() % linhas) {
+        fgets(linha, sizeof(linha), fptr);
         i++;
     }
-    //fseek( fptr, SEEK_SET, 0 );
-    printf("\n A palavra escolhida foi %s", palavra);
-  
+    
+    printf("%s", linha);
+
     /*
     while(continuar!=1){
         x = rand() % tamarquivo;
@@ -92,6 +76,7 @@ void pessoa_pc(){
     }
     printf("\nTecle 1 para parar ou outro para continuar: ");
     printf("\nO numero de vitorias foi: %d", vitorias);
-    printf("\nO numero de derrotas foi: %d", derrotas);
-    fclose(fptr);*/
+    printf("\nO numero de derrotas foi: %d", derrotas);*/
+    fclose(fptr);
+    fclose(fp);
 }
