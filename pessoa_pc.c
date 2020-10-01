@@ -6,6 +6,7 @@ void pessoa_pc(){
     srand (( unsigned ) time (&t ) );
 
     //Declaração de variaveis
+    long offset;
     int x, linhas = 0;
     char palavra[MAX], c;
     char * palavras;
@@ -25,16 +26,21 @@ void pessoa_pc(){
         }
     } 
     printf("\nLinhas: %i\n",linhas + 1);
-    palavras = malloc (sizeof(char) * (linhas+1));
+    fseek( fptr, 0L, SEEK_END );
+    long tam = ftell(fptr);
+    palavras = malloc (sizeof(char) * tam);
 
     //lendo a palvra certa no aquivo
     x = rand() % linhas;
     //printf("x = %d", x);
+    //offset = quantidade de bits deslocados desde o inicio
+    fseek( fptr, SEEK_SET, 0 );
     fscanf ( fptr , "%s", palavras);
     //palavra[0] = palavras[x];
-    printf("\n A palavra escolhida foi %s", palavra);
+    printf("\n A palavra escolhida foi %s", palavras);
   
-
+    //fseek( fptr, 0L, SEEK_END );
+    //long tam = ftell(fptr);
   
     /*
     while(continuar!=1){

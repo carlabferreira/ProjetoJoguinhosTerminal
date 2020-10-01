@@ -95,6 +95,7 @@ void multiplayer(){
   }
 
   while (tentativas > 0 && certo != tamanho){
+    system("cls");
     printf("\n");
     for (int i = 0; i < (tamanho); i++){
       printf("%c", preencher[i]);
