@@ -6,13 +6,12 @@ void pessoa_pc(){
     srand (( unsigned ) time (&t ) );
 
     //Declaração de variaveis
-    long offset;
-    int x, linhas = 0;
-    char palavra[MAX], c;
+    int i, linhas = 0;
+    char palavra[100], c;
     char * palavras;
     FILE *fptr;
 
-    fptr = fopen("palavras.txt", "r");;
+    fptr = fopen("palavras2.txt", "r");;
 
     //Abrindo o arquivo
     if (fptr == NULL){
@@ -26,21 +25,18 @@ void pessoa_pc(){
         }
     } 
     printf("\nLinhas: %i\n",linhas + 1);
-    fseek( fptr, 0L, SEEK_END );
-    long tam = ftell(fptr);
-    palavras = malloc (sizeof(char) * tam);
-
-    //lendo a palvra certa no aquivo
-    x = rand() % linhas;
-    //printf("x = %d", x);
-    //offset = quantidade de bits deslocados desde o inicio
-    fseek( fptr, SEEK_SET, 0 );
-    fscanf ( fptr , "%s", palavras);
-    //palavra[0] = palavras[x];
-    printf("\n A palavra escolhida foi %s", palavras);
-  
     //fseek( fptr, 0L, SEEK_END );
     //long tam = ftell(fptr);
+
+    //lendo a palvra certa no aquivo
+    int x = rand() % linhas;
+    printf("\n x = %d", x);
+    while( i <= x) {
+        fgets(palavra, sizeof(palavra), fptr);
+        i++;
+    }
+    //fseek( fptr, SEEK_SET, 0 );
+    printf("\n A palavra escolhida foi %s", palavra);
   
     /*
     while(continuar!=1){
