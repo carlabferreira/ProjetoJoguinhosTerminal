@@ -1,4 +1,8 @@
-  
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#define MAX 20
   
 void pessoa_pc(){  
     FILE* fptr = fopen("palavras2.txt", "r");
@@ -6,9 +10,13 @@ void pessoa_pc(){
     if(fptr == NULL) {
         fprintf(stderr, "Erro ao abrir o palavras2.txt.");
     }
-    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10;
+    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10, chutes = 0;
     char linha[50], linha2[50];
     char c, letra[1], chutadas[50],  *preencher;
+
+    for(i = 0; i < 50; i++){
+        chutadas[i] = "1";
+    }
 
     while(fgets(linha2, sizeof(linha2), fp) != NULL) {
         linhas++;
@@ -45,7 +53,18 @@ void pessoa_pc(){
         fflush(stdin);
         scanf("%c", letra);
         letra[0] = tolower(letra[0]);
-        chutadas[] = letra[0];
+
+        for(i = 0; i <= chutes; i++){
+            if(letra[0] == chutadas[i]){
+                while(letra[0] == chutadas[i]){
+                    printf("\nDigite a letra que voce quer chutar: ");
+                    fflush(stdin);
+                    scanf("%c", letra);
+                }
+            }
+        }
+        chutadas[chutes] = letra[0];
+        chutes++;
         for (int i = 0; i < tamanho; i++){
             if (linha[i] == letra[0])
             {
