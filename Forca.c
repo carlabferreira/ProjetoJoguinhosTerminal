@@ -10,6 +10,7 @@ Jogo da forca em C com menu para escolher o tipo de jogo
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #define MAX 20
 #include "pessoa_pc.c"
 
