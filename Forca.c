@@ -130,7 +130,7 @@ void pessoa_pc(){
     if(fptr == NULL) {
         fprintf(stderr, "Erro ao abrir o palavras2.txt.");
     }
-    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10, chutes = 0;
+    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10, chutes = 0, repetido;
     char linha[50], linha2[50];
     char c, letra[1], chutadas[50],  *preencher;
 
@@ -166,7 +166,7 @@ void pessoa_pc(){
     //for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
     
     while (tentativas > 0 && certo != tamanho){
-        system("cls");
+        //system("cls");
         printf("\nrestam %d tentativas\n", tentativas);
         for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
         
@@ -177,23 +177,36 @@ void pessoa_pc(){
 
         for(i = 0; i <= chutes; i++){
             if(letra[0] == chutadas[i]){
-                while(letra[0] == chutadas[i]){
-                    printf("\nDigite a letra que voce quer chutar: ");
+                repetido = 1;
+                while(repetido){
+                    //system("cls");
+                    printf("\nrestam %d tentativas\n", tentativas);
+                    for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
+                    printf("\nAlguma que nao foi ne imbecil.\nDigite a letra que voce quer chutar: ");
                     fflush(stdin);
                     scanf("%c", letra);
+                    repetido = 0;
+                    for(i = 0; i <= chutes; i++) if(letra[0] == chutadas[i]) repetido = 1;
                 }
             }
         }
         chutadas[chutes] = letra[0];
         chutes++;
+
         for (int i = 0; i < tamanho; i++){
-            if (linha[i] == letra[0])
-            {
+            if (linha[i] == letra[0]){
                 preencher[i] = letra[0];
-                tentativas = tentativas +1;
                 certo ++;
             }
         }
+
+        for (int i = 0; i < tamanho; i++){
+            if (linha[i] == letra[0]){
+                tentativas = tentativas +1;
+                break;
+            }
+        }
+        printf("%d,%d", certo, tamanho);
         if (certo == tamanho){
             printf("\nPARABENS, VOCE VENCEU!!!");
             printf("\nA palavra era \" %s\"", linha);
