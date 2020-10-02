@@ -153,7 +153,9 @@ void pessoa_pc(){
     tamanho = strlen(linha);
     tamanho --;
     linha[tamanho] = ' ';
-    printf("\n tamanho: %d", tamanho);
+    printf("\nTamanho da palavra: %d", tamanho);
+    printf("\nDigite o numero de tentativas (recomendado = 10): ");
+    scanf("%i", &tentativas);
 
     for (i= 0; i < (tamanho); i++) linha[i] = tolower(linha[i]);
 
@@ -165,7 +167,7 @@ void pessoa_pc(){
     
     while (tentativas > 0 && certo != tamanho){
         system("cls");
-        printf("\n");
+        printf("\nrestam %d tentativas\n", tentativas);
         for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
         
         printf("\nDigite a letra que voce quer chutar: ");
@@ -198,7 +200,6 @@ void pessoa_pc(){
             break;
         }
         tentativas = tentativas - 1;
-        printf("\nrestam %d tentativas", tentativas);
     }
      free(preencher);
     /*
