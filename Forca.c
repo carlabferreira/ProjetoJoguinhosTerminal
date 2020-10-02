@@ -5,6 +5,7 @@ Carla Beatriz Ferreira
 Descrição:
 Jogo da forca em C com menu para escolher o tipo de jogo
 ------------- */
+
 //Incuindo as bibliotecas:
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +29,7 @@ int main(){
   int opcao;
 
   printf("\n----------------------------------");
-  printf("\n|  BEM-VINDO AO JOGO DE FORCA    |");
+  printf("\n|   BEM-VINDO AO JOGO DE FORCA   |");
   printf("\n| Escolha sua opcao:             |");
   printf("\n| (1) Multiplayer local          |");
   printf("\n| (2) Contra a maquina           |");
@@ -66,9 +67,9 @@ int main(){
 //---------------
 
 void multiplayer(){ 
-  char Jogador1[MAX], Jogador2[MAX], palavra[MAX], letra[1];
+  char Jogador1[MAX], Jogador2[MAX], palavra[MAX], letra[1], chutadas[50];
   char *preencher;
-  int certo = 0;
+  int certo = 0, chutes = 0;
 
   int tamanho, tentativas;
   system("cls"); //Limpa a tela, mas funciona só no windows
