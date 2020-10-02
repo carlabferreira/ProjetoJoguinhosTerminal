@@ -8,7 +8,7 @@ void pessoa_pc(){
     }
     int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10;
     char linha[50], linha2[50];
-    char c, letra, *preencher;
+    char c, letra[1], chutadas[50],  *preencher;
 
     while(fgets(linha2, sizeof(linha2), fp) != NULL) {
         linhas++;
@@ -23,10 +23,12 @@ void pessoa_pc(){
     printf("%s", linha);
 
     //------------------------------------------
-
+    
     tamanho = strlen(linha);
     tamanho --;
     printf("\n tamanho: %d", tamanho);
+
+    for (i= 0; i < (tamanho); i++) linha[i] = tolower(linha[i]);
 
     preencher = malloc(sizeof(char) * tamanho);
 
@@ -35,22 +37,24 @@ void pessoa_pc(){
     //for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
     
     while (tentativas > 0 && certo != tamanho){
-        system("cls");
+        //system("cls");
         printf("\n");
         for (i = 0; i < (tamanho); i++) printf("%c", preencher[i]);
         
         printf("\nDigite a letra que voce quer chutar: ");
         fflush(stdin);
         scanf("%c", letra);
-        printf("Letra = %c ", letra);
+        letra[0] = tolower(letra[0]);
+        chutadas[] = letra[0];
         for (int i = 0; i < tamanho; i++){
-            if (linha[i] == letra)
+            if (linha[i] == letra[0])
             {
-                preencher[i] = letra;
+                preencher[i] = letra[0];
                 tentativas = tentativas +1;
                 certo ++;
             }
         }
+        printf("%d %d", certo, tamanho);
         if (certo == tamanho){
             printf("\nPARABENS, VOCE VENCEU!!!");
             printf("\nA palavra era \"");
