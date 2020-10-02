@@ -27,6 +27,6 @@ int main() {
 
     printf("%s", linha);
     fclose(arquivo);
-
+    fclose(arquivo2);
     return 0;
 }
