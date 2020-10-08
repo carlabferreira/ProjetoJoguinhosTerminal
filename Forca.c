@@ -131,7 +131,7 @@ void pessoa_pc(){
     if(fptr == NULL) {
         fprintf(stderr, "Erro ao abrir o palavras2.txt.");
     }
-    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10, chutes = 0, repetido;
+    int i = 1, linhas = 0, certo = 0, tamanho, tentativas = 10, chutes = 0, repetido, x;
     char linha[50], linha2[50];
     char c, letra[1], chutadas[50],  *preencher;
 
@@ -142,9 +142,11 @@ void pessoa_pc(){
     while(fgets(linha2, sizeof(linha2), fp) != NULL) {
         linhas++;
     }
-
+    printf("%d", linhas);
     srand(time(NULL));
-    while(i <= rand() % linhas) {
+    x = rand() % linhas;
+    printf("\nx = %d", x);
+    while(i <= x) {
         fgets(linha, sizeof(linha), fptr);
         i++;
     }
