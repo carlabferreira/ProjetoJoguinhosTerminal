@@ -70,8 +70,8 @@ void facil (void){ // 9 x 9
     }
 
     for ( i = 0; i<nbombas; i++){
-        linha = rand() % 9;
-        coluna = rand() % 9;
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
         if(resposta[linha][coluna] == -1){//se numeros ja foram
             i --;
         }else{
@@ -80,14 +80,14 @@ void facil (void){ // 9 x 9
         }   // -1 = bomba
     }
     
-    /*for (i = 0; i<nlinhas; i++){
+    for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             printf("%i ", resposta[i][j]);
         }
         printf("\n");
-    }*/
+    }
 
-    //printatabuleiro (8, 8, matriz, resposta);    
+    printatabuleiro (nlinhas, ncolunas, matriz, resposta);    
 }
 
 void medio (void){//
@@ -105,18 +105,48 @@ void medio (void){//
     }
 
     for ( i = 0; i<nbombas; i++){
-        linha = rand() % 9;
-        coluna = rand() % 9;
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
         if(resposta[linha][coluna] == -1){//se numeros ja foram
             i --;
         }else{
-            //printf("%d %d\n", linha, coluna);
+            printf("%d %d\n", linha, coluna);
             resposta[linha][coluna] = -1;  
         }   // -1 = bomba
     }
 
+    for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            printf("%i ", resposta[i][j]);
+        }
+        printf("\n");
+    }
+
 }
 void dificil (void){
+    int nlinhas = 16, ncolunas = 30;
+    // -1 = bomba
+    int x, nbombas = 99, linha, coluna, i, j;
+    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    srand(time(NULL));
+
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriz[i][j] = 1;
+            resposta[i][j] = 0;
+        }
+    }
+
+    for ( i = 0; i<nbombas; i++){
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
+    }
 
 }
 void personalizado (void){
