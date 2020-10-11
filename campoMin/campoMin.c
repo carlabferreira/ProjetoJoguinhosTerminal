@@ -87,7 +87,7 @@ void facil (void){ // 9 x 9
         printf("\n");
     }
 
-    printatabuleiro (nlinhas, ncolunas, matriz, resposta);    
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);    
 }
 
 void medio (void){//
@@ -147,6 +147,13 @@ void dificil (void){
             resposta[linha][coluna] = -1;  
         }   // -1 = bomba
     }
+
+    /*for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            printf("%i ", resposta[i][j]);
+        }
+        printf("\n");
+    }*/
 
 }
 void personalizado (void){
