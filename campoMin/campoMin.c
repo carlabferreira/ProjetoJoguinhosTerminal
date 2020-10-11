@@ -6,7 +6,7 @@ void facil (void);
 void medio (void);
 void dificil (void);
 void personalizado (void);
-void printatabuleiro(int, int , int [][], int [][]);
+void printatabuleiro(int nlinha, int ncoluna, int matriz[][], int resposta[][]);
 
 int main(){
     int opcao;
