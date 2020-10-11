@@ -69,7 +69,7 @@ void facil (void){ // 9 x 9
         resposta[linha][coluna] = -1;
     }
     
-    printatabuleiro (8,8, matriz, resposta);
+    printatabuleiro (8, 8, matriz, resposta);
     
     
 }
