@@ -52,7 +52,7 @@ int main(){
 }
 
 void facil (void){ // 9 x 9
-    int nlinhas = 8, ncolunas = 8;
+    int nlinhas = 9, ncolunas = 9;
     // -1 = bomba
     int x, nbombas = 10, linha, coluna, i, j;
     int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
@@ -68,18 +68,20 @@ void facil (void){ // 9 x 9
     for ( i = 0; i<nbombas; i++){
         linha = rand() % 9;
         coluna = rand() % 9;
-        printf("%d %d\n", linha, coluna);
-        if(resposta[linha][coluna] == -1){
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
             i --;
-        }else{resposta[linha][coluna] = -1;  }   // -1 = bomba
+        }else{
+            //printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
     }
     
-    for (i = 0; i<nlinhas; i++){
+    /*for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             printf("%i ", resposta[i][j]);
         }
         printf("\n");
-    }
+    }*/
 
     //printatabuleiro (8, 8, matriz, resposta);    
 }
