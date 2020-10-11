@@ -6,7 +6,7 @@ void facil (void);
 void medio (void);
 void dificil (void);
 void personalizado (void);
-void printatabuleiro(void);
+void printatabuleiro(int nlinha, int ncoluna);
 
 int main(){
     int opcao;
@@ -49,4 +49,10 @@ int main(){
     }
 
     return (0);
+}
+
+void facil (void){ // 9 x 9
+    //int nlinhas = 8, ncolunas = 8;
+    printatabuleiro (8,8);
+    
 }
