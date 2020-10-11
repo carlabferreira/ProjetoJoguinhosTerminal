@@ -6,7 +6,7 @@ void facil (void);
 void medio (void);
 void dificil (void);
 void personalizado (void);
-void printatabuleiro(int nlinha, int ncoluna, int matriz[][], int resposta[][]);
+void printatabuleiro(int nlinha, int ncoluna, int matriz[nlinha][ncoluna], int resposta[nlinha][ncoluna]);
 
 int main(){
     int opcao;
@@ -58,18 +58,38 @@ void facil (void){ // 9 x 9
     int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
     srand(time(NULL));
 
-    for (i = 0; i<=nlinhas; i++){
-        for (j = 0; j<= ncolunas; j++ ){
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
             matriz[i][j] = 1;
+            resposta[i][j] = 0;
         }
     }
-    for ( i = 0; i<=nbombas; i++){
+
+    for ( i = 0; i<nbombas; i++){
         linha = rand() % 9;
         coluna = rand() % 9;
-        resposta[linha][coluna] = -1;
+        printf("%d %d\n", linha, coluna);
+        if(resposta[linha][coluna] == -1){
+            i --;
+        }else{resposta[linha][coluna] = -1;  }   // -1 = bomba
     }
     
-    printatabuleiro (8, 8, matriz, resposta);
-    
-    
+    for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            printf("%i ", resposta[i][j]);
+        }
+        printf("\n");
+    }
+
+    //printatabuleiro (8, 8, matriz, resposta);    
+}
+
+void medio (void){
+
+}
+void dificil (void){
+
+}
+void personalizado (void){
+
 }
