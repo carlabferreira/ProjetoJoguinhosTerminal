@@ -85,7 +85,30 @@ void facil (void){ // 9 x 9
     //printatabuleiro (8, 8, matriz, resposta);    
 }
 
-void medio (void){
+void medio (void){//
+    int nlinhas = 16, ncolunas = 16;
+    // -1 = bomba
+    int x, nbombas = 40, linha, coluna, i, j;
+    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    srand(time(NULL));
+
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriz[i][j] = 1;
+            resposta[i][j] = 0;
+        }
+    }
+
+    for ( i = 0; i<nbombas; i++){
+        linha = rand() % 9;
+        coluna = rand() % 9;
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            //printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
+    }
 
 }
 void dificil (void){
