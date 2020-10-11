@@ -8,8 +8,7 @@ void dificil (void);
 void personalizado (void);
 void printatabuleiro(void);
 
-int main()
-{
+int main(){
     int opcao;
 
     printf("\n----------------------------------");
