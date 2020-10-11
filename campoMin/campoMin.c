@@ -31,8 +31,7 @@ int main(){
     scanf("%i", &opcao);
     //printf("\nA opcao escolhida foi %i", opcao);
 
-    switch (opcao)
-    {
+    switch (opcao){
     case 1:
         facil();
         break;
