@@ -7,6 +7,7 @@ void medio (void);
 void dificil (void);
 void personalizado (void);
 
+void printacabecalho(int ncoluna);
 void printaespaco(int ncoluna);
 void printatabuleiro(int nlinha, int ncoluna, int matriz[nlinha][ncoluna], int resposta[nlinha][ncoluna]);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
@@ -173,8 +174,21 @@ void personalizado (void){
 
 }
 
+void printacabecalho(int ncoluna){
+    printf("   ");
+    for(int l = 1; l <= ncoluna; l++){
+        if(l<10) printf("  %d   ",l);
+        else printf(" %d %d  ", l/10, l%10);
+    }
+    printf("\n   ");
+    for(int k = 0; k < ncoluna; k++){
+        printf("%c%c%c%c%c ", 196, 196, 196, 196, 196);
+    }
+    printf("\n");
+}
+
 void printaespaco(int ncoluna){
-    printf("\n ");
+    printf("\n   ");
     for(int k = 0; k < ncoluna; k++){
         printf("%c%c%c%c%c ", 196, 196, 196, 196, 196);
     }
@@ -200,9 +214,9 @@ void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int t
 }
 
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
-    printaespaco(ncoluna);
+    printacabecalho(ncoluna);
     for(int i = 0; i < nlinha; i++){
-        printf("|");
+        printf("%c |", (i + 65));
         for(int j = 0; j < ncoluna; j++){
             conteudocasa(nlinha, ncoluna, tabuleiro, tabuleirodescoberto, i, j);
             printf("|");
