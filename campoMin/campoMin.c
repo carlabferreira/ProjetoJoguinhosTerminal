@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #define MAX 30
 
 void facil (char a [MAX]);
@@ -10,7 +12,6 @@ void personalizado (char a [MAX]);
 
 void printacabecalho(int ncoluna);
 void printaespaco(int ncoluna);
-void printatabuleiro(int nlinha, int ncoluna, int matriz[nlinha][ncoluna], int resposta[nlinha][ncoluna]);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 
@@ -59,6 +60,9 @@ int main(){
 
     return (0);
 }
+
+
+//----------- Montagem de tabuleiros e bombas de acordo com dificuldade ------------
 
 void facil (char jogador [MAX]){ // 9 x 9
     int nlinhas = 9, ncolunas = 9;
@@ -122,6 +126,7 @@ void medio (char jogador [MAX]){//
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
 }
+
 void dificil (char jogador [MAX]){
     int nlinhas = 16, ncolunas = 28;
     // -1 = bomba
@@ -150,22 +155,23 @@ void dificil (char jogador [MAX]){
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
 }
 void personalizado (char jogador [MAX]){
+    //declarando variaveis
     int nlinhas, ncolunas;
     int nbombas, linha, coluna, i, j;
-    int ** resposta, ** matriz;
+    //int ** resposta, ** matriz;
     srand(time(NULL));
     
     //Conseguindo valores de tamanhos e bombas
-    printf("\nDigite quantas linhas voce deseja, %s: ", jogador);
+    printf("\nDigite quantas linhas voce deseja, %s(max 26): ", jogador);
     scanf("%i", &nlinhas);
-    if(nlinhas <= 0){ //Verificando se é um numero válido
+    if(nlinhas <= 0 || nlinhas>26){ //Verificando se é um numero válido
         do{
             printf("\nDigite um valor valido: ");
             scanf("%i", &nlinhas);
-        }while(nlinhas <= 0);
+        }while(nlinhas <= 0 || nlinhas>26);
     }
 
-    printf("\nDigite quantas colunas voce deseja(max 28): " );
+    printf("\nDigite quantas colunas voce deseja(max 28), %s: ", jogador);
     scanf("%i", &ncolunas);
     if(ncolunas>28 || ncolunas <= 0){//Verificando se é um numero válido
         do{
@@ -174,20 +180,57 @@ void personalizado (char jogador [MAX]){
         }while(ncolunas>28 || ncolunas < 0);
     }
 
-    printf("\nDigite quantas bombas voce deseja: ");
+    printf("\nDigite quantas bombas voce deseja, %s: ", jogador);
     scanf("%i", &nbombas);
-    if(nbombas <= 0){ //Verificando se é um numero válido
+    if(nbombas <= 0 || nbombas>=(nlinhas*ncolunas) ){ //Verificando se é um numero válido
         do{
             printf("\nDigite um valor valido: ");
-            scanf("%i", &nlinhas);
-        }while(nlinhas <= 0);
+            scanf("%i", &nbombas);
+        }while(nbombas <= 0 || nbombas>=(nlinhas*ncolunas));
     }
 
     //Alocando memoria para as matrizes do tabuleiro
-    matriz = (int **) malloc(sizeof(int) * nlinhas * ncolunas);
-    resposta = (int **) malloc(sizeof(int) * nlinhas * ncolunas);
+    /*matriz = malloc(sizeof(int) * nlinhas * ncolunas);
+    resposta = malloc(sizeof(int) * nlinhas * ncolunas);*/
+    
+
+    int matriz [nlinhas][ncolunas], resposta[nlinhas][ncolunas];
+    
+    //montando o tabuleiro
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriz[i][j] = 1;
+            resposta[i][j] = 0;
+        }
+    }
+    //-----------
+    for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            printf("%i ", resposta[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    for ( i = 0; i<nbombas; i++){
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            //printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
+    }
+
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+
+    free(matriz);
+    free(resposta);
 
 }
+
+//---------------------- Questão visual e jogabilidade ------------------------
 
 void printacabecalho(int ncoluna){
     printf("   ");
