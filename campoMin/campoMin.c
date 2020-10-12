@@ -19,9 +19,9 @@ int main(){
     printf("\n----------------------------------");
     printf("\n|   BEM-VINDO AO CAMPO MINADO    |");
     printf("\n| Escolha sua opcao:             |");
-    printf("\n| (1) Facil                      |");
-    printf("\n| (2) Medio                      |");
-    printf("\n| (3) Dificil                    |");
+    printf("\n| (1) Facil (9x9)                |");
+    printf("\n| (2) Medio (16x16)              |");
+    printf("\n| (3) Dificil (16x28)            |");
     printf("\n| (4) Personalizado              |");
     printf("\n| (5) Sair                       |");
     printf("\n----------------------------------");
@@ -58,7 +58,7 @@ int main(){
 void facil (void){ // 9 x 9
     int nlinhas = 9, ncolunas = 9;
     // -1 = bomba
-    int x, nbombas = 10, linha, coluna, i, j;
+    int nbombas = 10, linha, coluna, i, j;
     int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
     srand(time(NULL));
 
@@ -80,74 +80,6 @@ void facil (void){ // 9 x 9
         }   // -1 = bomba
     }
     
-    for (i = 0; i<nlinhas; i++){
-        for (j = 0; j< ncolunas; j++ ){
-            printf("%i ", resposta[i][j]);
-        }
-        printf("\n");
-    }
-
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);    
-}
-
-void medio (void){//
-    int nlinhas = 16, ncolunas = 16;
-    // -1 = bomba
-    int x, nbombas = 40, linha, coluna, i, j;
-    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
-    srand(time(NULL));
-
-    for (i = 0; i< nlinhas; i++){
-        for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
-        }
-    }
-
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-
-    for (i = 0; i<nlinhas; i++){
-        for (j = 0; j< ncolunas; j++ ){
-            printf("%i ", resposta[i][j]);
-        }
-        printf("\n");
-    }
-
-}
-void dificil (void){
-    int nlinhas = 16, ncolunas = 30;
-    // -1 = bomba
-    int x, nbombas = 99, linha, coluna, i, j;
-    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
-    srand(time(NULL));
-
-    for (i = 0; i< nlinhas; i++){
-        for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
-        }
-    }
-
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-
     /*for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             printf("%i ", resposta[i][j]);
@@ -155,8 +87,89 @@ void dificil (void){
         printf("\n");
     }*/
 
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);    
+}
+
+void medio (void){//
+    int nlinhas = 16, ncolunas = 16;
+    // -1 = bomba
+    int nbombas = 40, linha, coluna, i, j;
+    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    srand(time(NULL));
+
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriz[i][j] = 1;
+            resposta[i][j] = 0;
+        }
+    }
+
+    for ( i = 0; i<nbombas; i++){
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
+    }
+
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+}
+void dificil (void){
+    int nlinhas = 16, ncolunas = 28;
+    // -1 = bomba
+    int nbombas = 95, linha, coluna, i, j;
+    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    srand(time(NULL));
+
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriz[i][j] = 1;
+            resposta[i][j] = 0;
+        }
+    }
+
+    for ( i = 0; i<nbombas; i++){
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
+        if(resposta[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            printf("%d %d\n", linha, coluna);
+            resposta[linha][coluna] = -1;  
+        }   // -1 = bomba
+    }
+
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
 }
 void personalizado (void){
+    int nlinhas, ncolunas;
+    int nbombas, linha, coluna, i, j;
+    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    srand(time(NULL));
+
+    printf("\nDigite quantas linhas voce deseja: ");
+    scanf("%i", &nlinhas);
+    if(nlinhas <= 0){
+        do{
+            printf("\nDigite um valor valido: ");
+            scanf("%i", &nlinhas);
+        }while(nlinhas <= 0);
+    }
+
+
+    printf("\nDigite quantas colunas voce deseja(max 28): " );
+    scanf("%i", &ncolunas);
+    if(ncolunas>28 || ncolunas <= 0){
+        do{
+            printf("\nDigite um valor valido: ");
+            scanf("%i", &ncolunas);
+        }while(ncolunas>28 || ncolunas < 0);
+    }
+    printf("\nDigite quantas bombas voce deseja: ");
+    scanf("%i", &nbombas);
 
 }
 
