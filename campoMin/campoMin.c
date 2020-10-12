@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#define MAX 30
 
-void facil (void);
-void medio (void);
-void dificil (void);
-void personalizado (void);
+void facil (char a [MAX]);
+void medio (char a [MAX]);
+void dificil (char a [MAX]);
+void personalizado (char a [MAX]);
 
 void printacabecalho(int ncoluna);
 void printaespaco(int ncoluna);
@@ -16,6 +17,7 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
 
 int main(){
     int opcao;
+    char jogador[MAX];
 
     printf("\n----------------------------------");
     printf("\n|   BEM-VINDO AO CAMPO MINADO    |");
@@ -30,20 +32,22 @@ int main(){
 
     printf("\n\n->");
     scanf("%i", &opcao);
+    printf("\nDigite seu nome: ");
+    scanf("%s", jogador);
     //printf("\nA opcao escolhida foi %i", opcao);
 
     switch (opcao){
     case 1:
-        facil();
+        facil(jogador);
         break;
     case 2:
-        medio();
+        medio(jogador);
         break;
     case 3:
-        dificil();
+        dificil(jogador);
         break;
     case 4:
-        personalizado();
+        personalizado(jogador);
         break;
     case 5:
         printf("Saindo...\n");
@@ -56,7 +60,7 @@ int main(){
     return (0);
 }
 
-void facil (void){ // 9 x 9
+void facil (char jogador [MAX]){ // 9 x 9
     int nlinhas = 9, ncolunas = 9;
     // -1 = bomba
     int nbombas = 10, linha, coluna, i, j;
@@ -91,7 +95,7 @@ void facil (void){ // 9 x 9
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);    
 }
 
-void medio (void){//
+void medio (char jogador [MAX]){//
     int nlinhas = 16, ncolunas = 16;
     // -1 = bomba
     int nbombas = 40, linha, coluna, i, j;
@@ -111,14 +115,14 @@ void medio (void){//
         if(resposta[linha][coluna] == -1){//se numeros ja foram
             i --;
         }else{
-            printf("%d %d\n", linha, coluna);
+            //printf("%d %d\n", linha, coluna);
             resposta[linha][coluna] = -1;  
         }   // -1 = bomba
     }
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
 }
-void dificil (void){
+void dificil (char jogador [MAX]){
     int nlinhas = 16, ncolunas = 28;
     // -1 = bomba
     int nbombas = 95, linha, coluna, i, j;
@@ -138,39 +142,50 @@ void dificil (void){
         if(resposta[linha][coluna] == -1){//se numeros ja foram
             i --;
         }else{
-            printf("%d %d\n", linha, coluna);
+            //printf("%d %d\n", linha, coluna);
             resposta[linha][coluna] = -1;  
         }   // -1 = bomba
     }
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
 }
-void personalizado (void){
+void personalizado (char jogador [MAX]){
     int nlinhas, ncolunas;
     int nbombas, linha, coluna, i, j;
-    int resposta[nlinhas][ncolunas], matriz[nlinhas][ncolunas];
+    int ** resposta, ** matriz;
     srand(time(NULL));
-
-    printf("\nDigite quantas linhas voce deseja: ");
+    
+    //Conseguindo valores de tamanhos e bombas
+    printf("\nDigite quantas linhas voce deseja, %s: ", jogador);
     scanf("%i", &nlinhas);
-    if(nlinhas <= 0){
+    if(nlinhas <= 0){ //Verificando se é um numero válido
         do{
             printf("\nDigite um valor valido: ");
             scanf("%i", &nlinhas);
         }while(nlinhas <= 0);
     }
 
-
     printf("\nDigite quantas colunas voce deseja(max 28): " );
     scanf("%i", &ncolunas);
-    if(ncolunas>28 || ncolunas <= 0){
+    if(ncolunas>28 || ncolunas <= 0){//Verificando se é um numero válido
         do{
             printf("\nDigite um valor valido: ");
             scanf("%i", &ncolunas);
         }while(ncolunas>28 || ncolunas < 0);
     }
+
     printf("\nDigite quantas bombas voce deseja: ");
     scanf("%i", &nbombas);
+    if(nbombas <= 0){ //Verificando se é um numero válido
+        do{
+            printf("\nDigite um valor valido: ");
+            scanf("%i", &nlinhas);
+        }while(nlinhas <= 0);
+    }
+
+    //Alocando memoria para as matrizes do tabuleiro
+    matriz = (int **) malloc(sizeof(int) * nlinhas * ncolunas);
+    resposta = (int **) malloc(sizeof(int) * nlinhas * ncolunas);
 
 }
 
