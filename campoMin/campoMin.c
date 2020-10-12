@@ -17,6 +17,8 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
 
+void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
+
 int main(){
     int opcao;
     char jogador[MAX];
@@ -237,7 +239,7 @@ void personalizado (char jogador [MAX]){
 void printacabecalho(int ncoluna){
     printf("   ");
     for(int l = 1; l <= ncoluna; l++){
-        if(l<10) printf("  %d   ",l);
+        if(l < 10) printf("  %d   ",l);
         else printf(" %d %d  ", l/10, l%10);
     }
     printf("\n   ");
@@ -256,20 +258,25 @@ void printaespaco(int ncoluna){
 }
 
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual){
-    if(tabuleirodescoberto[linhaatual][colunaatual] == 1){
-        switch (tabuleiro[linhaatual][colunaatual]){
-        case -1:
-            printf("  X  ");
+    switch(tabuleirodescoberto[linhaatual][colunaatual]){
+        case 1:
+            switch (tabuleiro[linhaatual][colunaatual]){
+            case -1:
+                printf("  X  ");
+                break;
+            case 0:
+                printf("%c%c%c%c%c", 176, 176, 176, 176, 176);
+                break;
+            default:
+                printf("  %i  ",tabuleiro[linhaatual][colunaatual]);
+                break;
+            }
             break;
-        case 0:
-            printf("%c%c%c%c%c", 176, 176, 176, 176, 176);
+        case 2:
+            printf("SAFE ");
             break;
         default:
-            break;
-        }
-    }
-    else{
-        printf("%c%c%c%c%c", 178, 178, 178, 178, 178, 178);
+            printf("%c%c%c%c%c", 178, 178, 178, 178, 178, 178);
     }
 }
 
@@ -283,7 +290,7 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
         }
         printaespaco(ncoluna);
     }
-}
+} 
 
 //-------------------------------------------------
 
@@ -343,5 +350,69 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){
             printf("%i ", matriznum[i][j]);
         }
         printf("\n");
+    }
+}
+
+//-------------------------------------------------
+
+void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]){
+    int numerocasa, i, letracasa, mensagem;
+    char casa[4];
+
+    while(1){
+        system("cls");
+        printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+        switch (mensagem){
+        case 1:
+            printf("Voce ja sabe o que tem ai ne lerdo?\nObvio que nao tem bomba\n");
+            mensagem = 0;
+            break;
+        
+        default:
+            break;
+        }
+        printf("Digite BD para colocar/remover uma bandeira\n");
+        printf("Qual casa voce deseja revelar, %s? ", jogador);
+        scanf("%s", casa);
+        for(i = 0; i < 3; i++) casa[i] = toupper(casa[i]);
+        if(casa[0] == 'B' && casa[1] == 'D'){
+            system("cls");
+            printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+            printf("Digite BD para desistir de colocar/remover uma bandeira\n");
+            printf("Em qual casa voce deseja colocar/remover a bandeira, %s? ", jogador);
+            scanf("%s", casa);
+            for(i = 0; i < 3; i++) casa[i] = toupper(casa[i]);
+            letracasa = casa[0] - 'A';
+            if(casa[2] != 0){
+                numerocasa = (casa[1] - 48) * 10;
+                numerocasa += casa[2] - 49;
+            }
+            else{
+                numerocasa = casa[1] - 49;
+            }
+            // se na matriz de casas descobertas o valor for 2 é porque é uma bandeira
+            if(tabuleirodescoberto[letracasa][numerocasa] == 0) tabuleirodescoberto[letracasa][numerocasa] = 2;
+            else if(tabuleirodescoberto[letracasa][numerocasa] == 2) tabuleirodescoberto[letracasa][numerocasa] = 0;
+            else mensagem = 1;
+        }
+        else{
+            letracasa = casa[0] - 'A';
+            if(casa[2] != 0){
+                //printf("eu vim aqui 1, '%i' ", casa[2]);
+                numerocasa = (casa[1] - 48) * 10;
+                numerocasa += casa[2] - 49;
+            }
+            else{
+                //printf("eu vim aqui 2, '%c' ",' ');
+                numerocasa = casa[1] - 49;
+            }
+            tabuleirodescoberto[letracasa][numerocasa] = 1;
+            if(tabuleiro[letracasa][numerocasa] == -1){
+                system("cls");
+                printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+                printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
+                break;
+            }
+        }
     }
 }
