@@ -15,6 +15,7 @@ void printaespaco(int ncoluna);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 
+void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
 
 int main(){
     int opcao;
@@ -96,7 +97,8 @@ void facil (char jogador [MAX]){ // 9 x 9
         printf("\n");
     }*/
 
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);    
+    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+    mapeando (nlinhas, ncolunas, resposta);    
 }
 
 void medio (char jogador [MAX]){//
@@ -280,5 +282,66 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
             printf("|");
         }
         printaespaco(ncoluna);
+    }
+}
+
+//-------------------------------------------------
+
+void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){ 
+    //declarando as variaveis
+    int i, j;
+    int matriznum[nlinhas][ncolunas];//matriznum = matriz de zeros inicialmente
+
+    for (i = 0; i< nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            matriznum[i][j] = 0;
+        }
+    }
+    
+    for (i = 0; i< nlinhas; i++){ //percorrendo toda a matriz resposta proucurando bombas
+        for (j = 0; j< ncolunas; j++ ){
+            if(resposta[i][j] == -1){//se for uma bomba
+                //todos os lugares adjacentes no quadrande vão ter +1
+               
+                //linha acima
+                if(i>0){//não é a primeira
+                    if(j>0){
+                        matriznum[i-1][j-1] ++;
+                    }
+                    matriznum[i-1][j] ++;
+                    if(j<8){
+                    matriznum[i-1][j+1] ++;
+                    }
+                }
+
+                //linha atual
+                if(j>0){
+                matriznum[i][j-1] ++;
+                }
+                matriznum[i][j] = -8;//onde está a bomba
+                if(j<8){
+                matriznum[i][j+1] ++;
+                }
+
+                
+                //linha abaixo
+                if(i<8){//não é a ultima
+                    if(j>0){
+                        matriznum[i+1][j-1] ++;
+                    }
+                    matriznum[i+1][j] ++;
+                    if (j<8){
+                        matriznum[i+1][j+1] ++;
+                    }
+                } 
+            }
+        }
+    }
+
+    for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            printf("%i ", matriznum[i][j]);
+        }
+        printf("\n");
     }
 }
