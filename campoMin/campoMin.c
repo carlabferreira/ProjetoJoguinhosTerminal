@@ -15,7 +15,7 @@ void printaespaco(int ncoluna);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 
-void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
+void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]);
 
 void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
 
@@ -100,7 +100,7 @@ void facil (char jogador [MAX]){ // 9 x 9
     }*/
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
-    mapeando (nlinhas, ncolunas, resposta);    
+    mapeando (nlinhas, ncolunas, resposta, jogador);    
 }
 
 void medio (char jogador [MAX]){//
@@ -294,14 +294,16 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
 
 //-------------------------------------------------
 
-void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){ 
+void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]){ 
     //declarando as variaveis
     int i, j;
-    int matriznum[nlinhas][ncolunas];//matriznum = matriz de zeros inicialmente
+    int matriznum[nlinhas][ncolunas], matriz[nlinhas][ncolunas];//matriznum = matriz de zeros inicialmente e 
+    //depois a resposta com qtdd de bombas perto
 
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             matriznum[i][j] = 0;
+            matriz[i][j] = 0;
         }
     }
     
@@ -345,12 +347,24 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){
         }
     }
 
+    //Juntando as duas matrizes
+    for (i = 0; i<nlinhas; i++){
+        for (j = 0; j< ncolunas; j++ ){
+            if(matriznum[i][j] < 0){//não é bomba
+                matriznum[i][j] = -1;
+            }
+        }
+    }
+
     for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             printf("%i ", matriznum[i][j]);
         }
         printf("\n");
     }
+
+    jogando(nlinhas, ncolunas, matriznum, matriz, jogador);
+
 }
 
 //-------------------------------------------------
