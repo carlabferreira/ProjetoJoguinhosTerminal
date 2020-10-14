@@ -10,15 +10,15 @@ void medio (char a [MAX]);
 void dificil (char a [MAX]);
 void personalizado (char a [MAX]);
 
-void printacabecalho(int ncoluna);
-void printaespaco(int ncoluna);
-void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
-void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
+void printacabecalho(int ncolunas);
+void printaespaco(int ncolunas);
+void conteudocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], int linhaatual, int colunaatual);
+void printatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]);
-int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
+int testaganhou(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
 
-void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
+void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[MAX]);
 
 int main(){
     int opcao;
@@ -130,6 +130,7 @@ void medio (char jogador [MAX]){//
     }
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+    mapeando (nlinhas, ncolunas, resposta, jogador);
 }
 
 void dificil (char jogador [MAX]){
@@ -158,6 +159,7 @@ void dificil (char jogador [MAX]){
     }
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+    mapeando (nlinhas, ncolunas, resposta, jogador);
 }
 void personalizado (char jogador [MAX]){
     //declarando variaveis
@@ -229,36 +231,37 @@ void personalizado (char jogador [MAX]){
     }
 
     printatabuleiro (nlinhas, ncolunas, resposta, matriz);
+    mapeando (nlinhas, ncolunas, resposta, jogador);
 
-    free(matriz);
-    free(resposta);
+    //free(matriz);
+    //free(resposta);
 
 }
 
 //---------------------- Questão visual e jogabilidade ------------------------
 
-void printacabecalho(int ncoluna){
+void printacabecalho(int ncolunas){
     printf("   ");
-    for(int l = 1; l <= ncoluna; l++){
+    for(int l = 1; l <= ncolunas; l++){
         if(l < 10) printf("  %d   ",l);
         else printf(" %d %d  ", l/10, l%10);
     }
     printf("\n   ");
-    for(int k = 0; k < ncoluna; k++){
+    for(int k = 0; k < ncolunas; k++){
         printf("%c%c%c%c%c ", 196, 196, 196, 196, 196);
     }
     printf("\n");
 }
 
-void printaespaco(int ncoluna){
+void printaespaco(int ncolunas){
     printf("\n   ");
-    for(int k = 0; k < ncoluna; k++){
+    for(int k = 0; k < ncolunas; k++){
         printf("%c%c%c%c%c ", 196, 196, 196, 196, 196);
     }
     printf("\n");
 }
 
-void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual){
+void conteudocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], int linhaatual, int colunaatual){
     switch(tabuleirodescoberto[linhaatual][colunaatual]){
         case 1:
             switch (tabuleiro[linhaatual][colunaatual]){
@@ -281,23 +284,23 @@ void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int t
     }
 }
 
-void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
-    printacabecalho(ncoluna);
-    for(int i = 0; i < nlinha; i++){
+void printatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]){
+    printacabecalho(ncolunas);
+    for(int i = 0; i < nlinhas; i++){
         printf("%c |", (i + 65));
-        for(int j = 0; j < ncoluna; j++){
-            conteudocasa(nlinha, ncoluna, tabuleiro, tabuleirodescoberto, i, j);
+        for(int j = 0; j < ncolunas; j++){
+            conteudocasa(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto, i, j);
             printf("|");
         }
-        printaespaco(ncoluna);
+        printaespaco(ncolunas);
     }
 } 
 
-int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
+int testaganhou(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]){
     int ganhou = 1, i , j; //venceu
     //testando com todas as casas não bombas abertas
-    for (int i = 0; i < nlinha; i++){
-        for (int j = 0; j < ncoluna; j++ ){
+    for (int i = 0; i < nlinhas; i++){
+        for (int j = 0; j < ncolunas; j++ ){
             if(tabuleiro[i][j] != -1 && tabuleirodescoberto[i][j] != 1){
                 ganhou = 0; //perdeu
             }
@@ -313,13 +316,13 @@ int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tab
 
 
     if ( ganhou == 1){
-        for (i = 0; i< nlinha; i++){
-            for (j = 0; j< ncoluna; j++ ){
+        for (i = 0; i< nlinhas; i++){
+            for (j = 0; j< ncolunas; j++ ){
                 tabuleirodescoberto[i][j] = 1;
             }
          }
         system("cls");
-        printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+        printatabuleiro(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto);
     }
     return(ganhou);
 }
@@ -400,13 +403,13 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
 
 //-------------------------------------------------
 
-void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[30]){
+void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[30]){
     int numerocasa, i, letracasa, mensagem;
     char casa[4];
 
     while(1){
         system("cls");
-        printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+        printatabuleiro(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto);
         switch (mensagem){
         case 1:
             printf("Voce ja sabe o que tem ai ne lerdo?\nObvio que nao tem bomba\n");
@@ -422,7 +425,7 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
         for(i = 0; i < 3; i++) casa[i] = toupper(casa[i]);
         if(casa[0] == 'B' && casa[1] == 'D'){
             system("cls");
-            printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+            printatabuleiro(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto);
             printf("Digite BD para desistir de colocar/remover uma bandeira\n");
             printf("Em qual casa voce deseja colocar/remover a bandeira, %s? ", jogador);
             scanf("%s", casa);
@@ -454,11 +457,11 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
             tabuleirodescoberto[letracasa][numerocasa] = 1;
             if(tabuleiro[letracasa][numerocasa] == -1){
                 system("cls");
-                printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+                printatabuleiro(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto);
                 printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
                 break;
             }
-            if(testaganhou(nlinha, ncoluna, tabuleiro, tabuleirodescoberto)){
+            if(testaganhou(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto)){
                 printf("Ate que voce nao eh tao ruim assim %s...", jogador);
                 break;
 
