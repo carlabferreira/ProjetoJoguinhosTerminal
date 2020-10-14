@@ -16,6 +16,7 @@ void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int t
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]);
+int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 
 void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
 
@@ -292,6 +293,36 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
     }
 } 
 
+int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
+    int ganhou = 1, i , j; //venceu
+    //testando com todas as casas não bombas abertas
+    for (int i = 0; i < nlinha; i++){
+        for (int j = 0; j < ncoluna; j++ ){
+            if(tabuleiro[i][j] != -1 && tabuleirodescoberto[i][j] != 1){
+                ganhou = 0; //perdeu
+            }
+        }
+    }
+
+    //testando se a quantidade de bandeira colocadas = qtdd de bombas e bandeiras nos lugares certos
+
+
+
+
+
+
+
+    if ( ganhou == 1){
+        for (i = 0; i< nlinha; i++){
+            for (j = 0; j< ncoluna; j++ ){
+                tabuleirodescoberto[i][j] = 1;
+            }
+         }
+        system("cls");
+        printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+    }
+    return(ganhou);
+}
 //-------------------------------------------------
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]){ 
@@ -369,7 +400,7 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
 
 //-------------------------------------------------
 
-void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]){
+void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[30]){
     int numerocasa, i, letracasa, mensagem;
     char casa[4];
 
@@ -427,6 +458,11 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
                 printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
                 break;
             }
+            if(testaganhou(nlinha, ncoluna, tabuleiro, tabuleirodescoberto)){
+                printf("Ate que voce nao eh tao ruim assim %s...", jogador);
+                break;
+
+            }
         }
     }
-}
+} 
