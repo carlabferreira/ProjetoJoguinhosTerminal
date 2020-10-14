@@ -398,33 +398,33 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
                 //todos os lugares adjacentes no quadrande vão ter +1
                
                 //linha acima
-                if(i>0){//não é a primeira
-                    if(j>0){
+                if(i > 0){//não é a primeira
+                    if(j > 0){
                         matriznum[i-1][j-1] ++;
                     }
                     matriznum[i-1][j] ++;
-                    if(j<8){
+                    if(j < ncolunas -1){
                     matriznum[i-1][j+1] ++;
                     }
                 }
 
                 //linha atual
-                if(j>0){
+                if(j > 0){
                 matriznum[i][j-1] ++;
                 }
                 matriznum[i][j] = -8;//onde está a bomba
-                if(j<8){
+                if(j < ncolunas -1){
                 matriznum[i][j+1] ++;
                 }
 
                 
                 //linha abaixo
-                if(i<8){//não é a ultima
-                    if(j>0){
+                if(i < nlinhas -1){//não é a ultima
+                    if(j > 0){
                         matriznum[i+1][j-1] ++;
                     }
                     matriznum[i+1][j] ++;
-                    if (j<8){
+                    if (j < ncolunas -1){
                         matriznum[i+1][j+1] ++;
                     }
                 } 
