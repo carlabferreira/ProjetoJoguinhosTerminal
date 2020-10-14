@@ -466,6 +466,11 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
             mensagem = 0;
             break;
         
+        case 2:
+            printf("Sabe escrever nao?????\n");
+            mensagem = 0;
+            break;
+
         default:
             break;
         }
@@ -473,6 +478,7 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
         printf("Qual casa voce deseja revelar, %s? ", jogador);
         scanf("%s", casa);
         for(i = 0; i < 3; i++) casa[i] = toupper(casa[i]);
+
         if(casa[0] == 'B' && casa[1] == 'D'){
             system("cls");
             printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
@@ -494,31 +500,36 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
             else mensagem = 1;
         }
         else{
-            letracasa = casa[0] - 'A';
-            if(casa[2] != 0){
-                //printf("eu vim aqui 1, '%i' ", casa[2]);
-                numerocasa = (casa[1] - 48) * 10;
-                numerocasa += casa[2] - 49;
+            if(casa[0] >= 65 && casa[0] <= 90 && casa[1] >= 48 && casa[1] <= 57 && (casa[2] == 0 || ((casa[2] >= 65 && casa[2] <= 90) || casa[2] >= 48 && casa[2] <= 57))){
+                letracasa = casa[0] - 'A';
+                if(casa[2] != 0){
+                    //printf("eu vim aqui 1, '%i' ", casa[2]);
+                    numerocasa = (casa[1] - 48) * 10;
+                    numerocasa += casa[2] - 49;
+                }
+                else{
+                    //printf("eu vim aqui 2, '%c' ",' ');
+                    numerocasa = casa[1] - 49;
+                }
+                tabuleirodescoberto[letracasa][numerocasa] = 1;
+                //limpa casas caso selecionar uma casa sem bombas proximas
+                if(tabuleiro[letracasa][numerocasa] == 0) limpandocasa(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+
+
+                if(tabuleiro[letracasa][numerocasa] == -1){
+                    system("cls");
+                    printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+                    printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
+                    break;
+                }
+                if(testaganhou(nlinha, ncoluna, tabuleiro, tabuleirodescoberto)){
+                    printf("Ate que voce nao eh tao ruim assim %s...", jogador);
+                    break;
+
+                }
             }
             else{
-                //printf("eu vim aqui 2, '%c' ",' ');
-                numerocasa = casa[1] - 49;
-            }
-            tabuleirodescoberto[letracasa][numerocasa] = 1;
-            //limpa casas caso selecionar uma casa sem bombas proximas
-            if(tabuleiro[letracasa][numerocasa] == 0) limpandocasa(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
-
-
-            if(tabuleiro[letracasa][numerocasa] == -1){
-                system("cls");
-                printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
-                printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
-                break;
-            }
-            if(testaganhou(nlinha, ncoluna, tabuleiro, tabuleirodescoberto)){
-                printf("Ate que voce nao eh tao ruim assim %s...", jogador);
-                break;
-
+                mensagem = 2;
             }
         }
     }
