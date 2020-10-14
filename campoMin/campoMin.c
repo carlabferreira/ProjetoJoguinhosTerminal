@@ -15,11 +15,12 @@ void printaespaco(int ncolunas);
 void conteudocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
 
-void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]);
+void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
 int testaganhou(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
-void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[MAX]);
+void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[MAX], int nbombas);
 void limpandocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
- 
+void criatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int nbombas);
+
 int main(){
     int opcao;
     char jogador[MAX];
@@ -77,31 +78,17 @@ void facil (char jogador [MAX]){ // 9 x 9
 
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
+            matriz[i][j] = 0;
         }
     }
 
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            //printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-    
     /*for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             printf("%i ", resposta[i][j]);
         }
         printf("\n");
     }*/
-
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
-    mapeando (nlinhas, ncolunas, resposta, jogador);    
+    jogando(nlinhas, ncolunas, resposta, matriz, jogador, nbombas);
 }
 
 void medio (char jogador [MAX]){//
@@ -113,24 +100,11 @@ void medio (char jogador [MAX]){//
 
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
+            matriz[i][j] = 0;
         }
     }
 
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            //printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
-    mapeando (nlinhas, ncolunas, resposta, jogador);
+    jogando(nlinhas, ncolunas, resposta, matriz, jogador, nbombas);
 }
 
 void dificil (char jogador [MAX]){
@@ -142,25 +116,13 @@ void dificil (char jogador [MAX]){
 
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
+            matriz[i][j] = 0;
         }
     }
 
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            //printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
-    mapeando (nlinhas, ncolunas, resposta, jogador);
+    jogando(nlinhas, ncolunas, resposta, matriz, jogador, nbombas);
 }
+
 void personalizado (char jogador [MAX]){
     //declarando variaveis
     int nlinhas, ncolunas;
@@ -206,33 +168,13 @@ void personalizado (char jogador [MAX]){
     //montando o tabuleiro
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
-            matriz[i][j] = 1;
-            resposta[i][j] = 0;
+            matriz[i][j] = 0;
         }
     }
     //-----------
-    for (i = 0; i<nlinhas; i++){
-        for (j = 0; j< ncolunas; j++ ){
-            printf("%i ", resposta[i][j]);
-        }
-        printf("\n");
-    }
 
 
-    for ( i = 0; i<nbombas; i++){
-        linha = rand() % nlinhas;
-        coluna = rand() % ncolunas;
-        if(resposta[linha][coluna] == -1){//se numeros ja foram
-            i --;
-        }else{
-            //printf("%d %d\n", linha, coluna);
-            resposta[linha][coluna] = -1;  
-        }   // -1 = bomba
-    }
-
-    printatabuleiro (nlinhas, ncolunas, resposta, matriz);
-    mapeando (nlinhas, ncolunas, resposta, jogador);
-
+    jogando(nlinhas, ncolunas, resposta, matriz, jogador, nbombas);
     //free(matriz);
     //free(resposta);
 
@@ -297,7 +239,7 @@ void printatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas]
 } 
 
 int testaganhou(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]){
-    int ganhou = 1, i , j; //venceu
+    int ganhou = 1, i, j; //venceu
     //testando com todas as casas não bombas abertas
     for (int i = 0; i < nlinhas; i++){
         for (int j = 0; j < ncolunas; j++ ){
@@ -342,7 +284,7 @@ void limpandocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], i
                         }
                         if(tabuleiro[i-1][j] == 0 && tabuleirodescoberto[i-1][j] != 1) flag = 1;
                         tabuleirodescoberto[i-1][j] = 1;
-                        if(j<8){
+                        if(j<ncolunas-1){
                             if(tabuleiro[i-1][j+1] == 0 && tabuleirodescoberto[i-1][j+1] != 1) flag = 1;
                             tabuleirodescoberto[i-1][j+1] = 1;
                         }
@@ -353,21 +295,21 @@ void limpandocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], i
                         if(tabuleiro[i][j-1] == 0 && tabuleirodescoberto[i][j-1] != 1) flag = 1;
                         tabuleirodescoberto[i][j-1] = 1;
                     }
-                    if(j<8){
+                    if(j<ncolunas-1){
                         if(tabuleiro[i][j+1] == 0 && tabuleirodescoberto[i][j+1] != 1) flag = 1;
                         tabuleirodescoberto[i][j+1] = 1;
                     }
 
                     
                     //linha abaixo
-                    if(i<8){//não é a ultima
+                    if(i<nlinhas-1){//não é a ultima
                         if(j>0){
                             if(tabuleiro[i+1][j-1] == 0 && tabuleirodescoberto[i+1][j-1] != 1) flag = 1;
                             tabuleirodescoberto[i+1][j-1] = 1;
                         }
                         if(tabuleiro[i+1][j] == 0 && tabuleirodescoberto[i+1][j] != 1) flag = 1;
                         tabuleirodescoberto[i+1][j] = 1;
-                        if (j<8){
+                        if (j<ncolunas-1){
                             if(tabuleiro[i+1][j+1] == 0 && tabuleirodescoberto[i+1][j+1] != 1) flag = 1;
                             tabuleirodescoberto[i+1][j+1] = 1;
                         }
@@ -377,14 +319,34 @@ void limpandocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], i
         }
     }
 }
+
+void criatabuleiro(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int nbombas){
+    int linha, coluna;
+    for (int i = 0; i< nlinhas; i++){
+        for (int j = 0; j< ncolunas; j++ ){
+            tabuleiro[i][j] = 0;
+        }
+    }
+    for (int  i = 0; i<nbombas; i++){
+        linha = rand() % nlinhas;
+        coluna = rand() % ncolunas;
+        if(tabuleiro[linha][coluna] == -1){//se numeros ja foram
+            i --;
+        }else{
+            //printf("%d %d\n", linha, coluna);
+            tabuleiro[linha][coluna] = -1;
+        }   // -1 = bomba
+    }
+    mapeando(nlinhas, ncolunas, tabuleiro);
+}
+
 //-------------------------------------------------
 
-void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char jogador[MAX]){ 
+void mapeando (int nlinhas, int ncolunas, int resposta[nlinhas][ncolunas]){ 
     //declarando as variaveis
     int i, j;
     int matriznum[nlinhas][ncolunas], matriz[nlinhas][ncolunas];//matriznum = matriz de zeros inicialmente e 
     //depois a resposta com qtdd de bombas perto
-
     for (i = 0; i< nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
             matriznum[i][j] = 0;
@@ -403,7 +365,7 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
                         matriznum[i-1][j-1] ++;
                     }
                     matriznum[i-1][j] ++;
-                    if(j<8){
+                    if(j<ncolunas-1){
                     matriznum[i-1][j+1] ++;
                     }
                 }
@@ -413,18 +375,18 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
                 matriznum[i][j-1] ++;
                 }
                 matriznum[i][j] = -8;//onde está a bomba
-                if(j<8){
+                if(j<ncolunas-1){
                 matriznum[i][j+1] ++;
                 }
 
                 
                 //linha abaixo
-                if(i<8){//não é a ultima
+                if(i<nlinhas-1){//não é a ultima
                     if(j>0){
                         matriznum[i+1][j-1] ++;
                     }
                     matriznum[i+1][j] ++;
-                    if (j<8){
+                    if (j<ncolunas-1){
                         matriznum[i+1][j+1] ++;
                     }
                 } 
@@ -441,21 +403,24 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
         }
     }
 
+    // for (i = 0; i<nlinhas; i++){
+    //     for (j = 0; j< ncolunas; j++ ){
+    //         printf("%i ", matriznum[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+
     for (i = 0; i<nlinhas; i++){
         for (j = 0; j< ncolunas; j++ ){
-            printf("%i ", matriznum[i][j]);
+            resposta[i][j] = matriznum[i][j];
         }
-        printf("\n");
     }
-
-    jogando(nlinhas, ncolunas, matriznum, matriz, jogador);
-
 }
 
 //-------------------------------------------------
 
-void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[30]){
-    int numerocasa, i, letracasa, mensagem;
+void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[MAX], int nbombas){
+    int numerocasa, i, letracasa, mensagem, flagtabuleirocriado = 1, tentativas = 1000;
     char casa[4];
 
     while(1){
@@ -513,6 +478,14 @@ void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int ta
                     numerocasa = casa[1] - 49;
                 }
                 tabuleirodescoberto[letracasa][numerocasa] = 1;
+                if(flagtabuleirocriado){
+                    flagtabuleirocriado = 0;
+                    criatabuleiro(nlinhas, ncolunas, tabuleiro, nbombas);
+                    while(tabuleiro[letracasa][numerocasa] != 0 && tentativas >= 1){
+                        criatabuleiro(nlinhas, ncolunas, tabuleiro, nbombas);
+                        tentativas--;
+                    }
+                }
                 //limpa casas caso selecionar uma casa sem bombas proximas
                 if(tabuleiro[letracasa][numerocasa] == 0) limpandocasa(nlinhas, ncolunas, tabuleiro, tabuleirodescoberto);
 
