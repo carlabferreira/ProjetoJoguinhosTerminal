@@ -38,8 +38,10 @@ int main(){
 
     printf("\n\n->");
     scanf("%i", &opcao);
-    printf("\nDigite seu nome: ");
-    scanf("%s", jogador);
+    if(opcao > 0 && opcao < 5){
+        printf("\nDigite seu nome: ");
+        scanf("%s", jogador);
+    }
     //printf("\nA opcao escolhida foi %i", opcao);
 
     switch (opcao){
@@ -58,6 +60,7 @@ int main(){
     case 5:
         printf("Saindo...\n");
         system("pause");
+        break;
     default:
         printf("Opcao invalida, saindo...\n");
         system("pause");
