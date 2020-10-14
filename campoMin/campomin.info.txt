@@ -9,3 +9,6 @@ Marcação de tempo de execução desde o inicio
 Quantas bombas faltam
 Marcação das q tem ctz
 
+
+terminar jogo com bandeiras
+mensagem passiva-agressiva ao tentar revelar lugar novamente
