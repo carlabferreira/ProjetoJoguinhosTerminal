@@ -19,9 +19,6 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas], char
 int testaganhou(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
 void jogando(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas], char jogador[MAX]);
 void limpandocasa(int nlinhas, int ncolunas, int tabuleiro[nlinhas][ncolunas], int tabuleirodescoberto[nlinhas][ncolunas]);
-
-
-void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
  
 int main(){
     int opcao;
