@@ -14,7 +14,7 @@ void printacabecalho(int ncoluna);
 void printaespaco(int ncoluna);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
-
+int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
 
 void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
@@ -292,6 +292,17 @@ void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], in
     }
 } 
 
+int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
+    int ganhou = 1;
+    for (int i = 0; i < nlinha; i++){
+        for (int j = 0; j < ncoluna; j++ ){
+            if(tabuleiro[i][j] != -1 && tabuleirodescoberto[i][j] != 1){
+                ganhou = 0;
+            }
+        }
+    }
+    return(ganhou);
+}
 //-------------------------------------------------
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){ 
@@ -355,7 +366,7 @@ void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){
 
 //-------------------------------------------------
 
-void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]){
+void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[30]){
     int numerocasa, i, letracasa, mensagem;
     char casa[4];
 
@@ -413,6 +424,11 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
                 printf("Tinha uma bomba ai ne idiota?, perdeu otario", jogador);
                 break;
             }
+            if(testaganhou(nlinha, ncoluna, tabuleiro, tabuleirodescoberto)){
+                printf("Ate que voce nao eh tao ruim assim %s...", jogador);
+                break;
+
+            }
         }
     }
-}
+} 
