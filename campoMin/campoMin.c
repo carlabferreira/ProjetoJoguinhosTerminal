@@ -15,10 +15,12 @@ void printaespaco(int ncoluna);
 void conteudocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], int linhaatual, int colunaatual);
 void printatabuleiro(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
 int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
+void limpandocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]);
+
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]);
 
 void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna], char jogador[MAX]);
-
+ 
 int main(){
     int opcao;
     char jogador[MAX];
@@ -303,6 +305,57 @@ int testaganhou(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tab
     }
     return(ganhou);
 }
+
+void limpandocasa(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabuleirodescoberto[nlinha][ncoluna]){
+    int flag = 1; //significa que alguma alteração foi feita e deve percorrer novamente a matriz
+    while(flag){
+        flag = 0;
+        for (int i = 0; i < nlinha; i++){ 
+            for (int j = 0; j < ncoluna; j++ ){
+                if(tabuleiro[i][j] == 0 && tabuleirodescoberto[i][j] == 1){
+                    if(i>0){
+                        //linha acima
+                        if(j>0){
+                            if(tabuleiro[i-1][j-1] == 0 && tabuleirodescoberto[i-1][j-1] != 1) flag = 1;
+                            tabuleirodescoberto[i-1][j-1] = 1;
+                        }
+                        if(tabuleiro[i-1][j] == 0 && tabuleirodescoberto[i-1][j] != 1) flag = 1;
+                        tabuleirodescoberto[i-1][j] = 1;
+                        if(j<8){
+                            if(tabuleiro[i-1][j+1] == 0 && tabuleirodescoberto[i-1][j+1] != 1) flag = 1;
+                            tabuleirodescoberto[i-1][j+1] = 1;
+                        }
+                    }
+
+                    //linha atual
+                    if(j>0){
+                        if(tabuleiro[i][j-1] == 0 && tabuleirodescoberto[i][j-1] != 1) flag = 1;
+                        tabuleirodescoberto[i][j-1] = 1;
+                    }
+                    if(j<8){
+                        if(tabuleiro[i][j+1] == 0 && tabuleirodescoberto[i][j+1] != 1) flag = 1;
+                        tabuleirodescoberto[i][j+1] = 1;
+                    }
+
+                    
+                    //linha abaixo
+                    if(i<8){//não é a ultima
+                        if(j>0){
+                            if(tabuleiro[i+1][j-1] == 0 && tabuleirodescoberto[i+1][j-1] != 1) flag = 1;
+                            tabuleirodescoberto[i+1][j-1] = 1;
+                        }
+                        if(tabuleiro[i+1][j] == 0 && tabuleirodescoberto[i+1][j] != 1) flag = 1;
+                        tabuleirodescoberto[i+1][j] = 1;
+                        if (j<8){
+                            if(tabuleiro[i+1][j+1] == 0 && tabuleirodescoberto[i+1][j+1] != 1) flag = 1;
+                            tabuleirodescoberto[i+1][j+1] = 1;
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
 //-------------------------------------------------
 
 void mapeando (int nlinhas, int ncolunas, int resposta [nlinhas][ncolunas]){ 
@@ -418,6 +471,10 @@ void jogando(int nlinha, int ncoluna, int tabuleiro[nlinha][ncoluna], int tabule
                 numerocasa = casa[1] - 49;
             }
             tabuleirodescoberto[letracasa][numerocasa] = 1;
+            //limpa casas caso selecionar uma casa sem bombas proximas
+            if(tabuleiro[letracasa][numerocasa] == 0) limpandocasa(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
+
+
             if(tabuleiro[letracasa][numerocasa] == -1){
                 system("cls");
                 printatabuleiro(nlinha, ncoluna, tabuleiro, tabuleirodescoberto);
