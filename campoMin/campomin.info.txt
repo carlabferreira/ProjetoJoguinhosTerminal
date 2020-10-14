@@ -1,7 +1,7 @@
 Campos	Demarcação	    Bombas	Nivel
 9x9	    1-9 x A - I		10	    Facil
 16x16	1-16 x A - P 	40	    Medio
-30x16	1-30 x A - P	99	    Dificil
+30x16	1-28 x A - P	99	    Dificil
 ixj	    1 - i x A - (J)	x	    Personalizado
 
 
